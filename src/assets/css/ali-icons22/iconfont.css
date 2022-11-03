@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3622401 */
+  /* Color fonts */
+  src: 
+       url('iconfont.woff2?t=1661953029319') format('woff2'),
+       url('iconfont.woff?t=1661953029319') format('woff'),
+       url('iconfont.ttf?t=1661953029319') format('truetype');
+}
+
+.iconfont,[class^="wlsys-"],[class*=" wlsys-"] {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wlsys-shuqian:before {
+  content: "\e64e";
+}
+
+.wlsys-public-welfare:before {
+  content: "\e652";
+}
+
+.wlsys-gongyi:before {
+  content: "\e60a";
+}
+
+.wlsys-shuqian1:before {
+  content: "\e6cb";
+}
+
+.wlsys-old:before {
+  content: "\e615";
+}
+
+.wlsys-laoren:before {
+  content: "\100e8";
+}
+
+.wlsys-menu_lrtx:before {
+  content: "\e654";
+}
+
+.wlsys-wuzhangaitongdao:before {
+  content: "\e613";
+}
+
+.wlsys-icon-fangwu:before {
+  content: "\e603";
+}
+
+.wlsys-jiaotong:before {
+  content: "\e604";
+}
+
+.wlsys-renkou:before {
+  content: "\e630";
+}
+
+.wlsys-nav_jijiandangan:before {
+  content: "\e617";
+}
+
+.wlsys-menu_xqrkxx:before {
+  content: "\e656";
+}
+
+.wlsys-tudi:before {
+  content: "\100e7";
+}
+

@@ -1,0 +1,95 @@
+// 全局样式
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  box-sizing: border-box;
+  outline: none;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.clearfix {
+  &::after {
+      content: "";
+      display: block;
+      clear: both;
+  }
+}
+
+.el-table,
+.el-table__expanded-cell {
+  background-color: rgba(14, 16, 38, 0.8);
+}
+
+.el-table td.el-table__cell,
+.el-table th.el-table__cell.is-leaf {
+  border: none;
+}
+
+.el-table th {
+  background-color: transparent !important;
+  // border: unset;
+  border-bottom: 2px solid #5078fc !important;
+}
+
+.el-table tr {
+  background-color: transparent !important;
+}
+
+.el-table--enable-row-transition .el-table__body td,
+.el-table .cell {
+  background-color: transparent;
+  color: rgba(255, 255, 255, 1);
+  // border: none;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.el-table th>.cell {
+  color: rgb(26, 188, 155);
+  font-weight: 900;
+}
+
+.el-table--border {
+  border: none;
+}
+
+.el-table::before {
+  //去除底部白线
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
+}
+
+.el-table::after {
+  //去除底部白线
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 0px;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover {
+  background-color: rgba(121, 235, 187, 0.3) !important;
+}
+
+/*表格鼠标悬停的样式（背景颜色）*/
+.el-table tbody tr:hover>td {
+  background-color: rgba(121, 235, 187, 0.3) !important;
+}
+
+.el-table__body .el-table__row.hover-row td {
+  background-color: rgba(121, 235, 187, 0.3) !important;
+}
