@@ -294,30 +294,57 @@ const routes = [
           },
         ]
       },
+      // {
+      //   path:'/wuzhangai',
+      //   name:'无障碍',
+      //   meta: { title: "无障碍", icon: "el-icon-guide" },
+      //   component:()=>import('@/views/wuzhangai/index.vue'),
+      //   children:[
+      //     {
+      //       path:'/houseInfo/canjiren',
+      //       meta: { title: "残疾人", icon: "el-icon-position" },
+      //       component:()=>import('@/views/wuzhangai/Canjiren.vue'),
+      //     },
+      //     {
+      //       path:'/houseInfo/laolinghua',
+      //       meta: { title: "老龄化", icon: "el-icon-position" },
+      //       component:()=>import('@/views/wuzhangai/Laolinghua.vue'),
+      //     },
+      //     {
+      //       path:'/houseInfo/children',
+      //       meta: { title: "儿童友好建设区", icon: "el-icon-position" },
+      //       component:()=>import('@/views/wuzhangai/Children.vue'),
+      //     },
+      //   ]
+      // },
       {
-        path:'/wuzhangai',
-        name:'无障碍',
-        meta: { title: "无障碍", icon: "el-icon-guide" },
-        component:()=>import('@/views/wuzhangai/index.vue'),
+        path:'/fagai',
+        name:'发改项目',
+        meta: { title: "发改项目", icon: "el-icon-guide" },
+        component:()=>import('@/views/fagai/index.vue'),
         children:[
           {
-            path:'/houseInfo/canjiren',
-            meta: { title: "残疾人", icon: "el-icon-position" },
-            component:()=>import('@/views/wuzhangai/Canjiren.vue'),
+            path:'/fagai/changzhu',
+            meta: { title: "常住人口", icon: "el-icon-position" },
+            component:()=>import('@/views/fagai/changzhu/Permanent.vue'),
           },
           {
-            path:'/houseInfo/laolinghua',
-            meta: { title: "老龄化", icon: "el-icon-position" },
-            component:()=>import('@/views/wuzhangai/Laolinghua.vue'),
+            path:'/fagai/liudong',
+            meta: { title: "流动人口", icon: "el-icon-position" },
+            component:()=>import('@/views/fagai/Liudong.vue'),
           },
           {
-            path:'/houseInfo/children',
-            meta: { title: "儿童友好建设区", icon: "el-icon-position" },
-            component:()=>import('@/views/wuzhangai/Children.vue'),
+            path:'/fagai/industry',
+            meta: { title: "工业园人流", icon: "el-icon-position" },
+            component:()=>import('@/views/fagai/Industry.vue'),
+          },
+          {
+            path:'/fagai/shangquan',
+            meta: { title: "商圈客流", icon: "el-icon-position" },
+            component:()=>import('@/views/fagai/Shangquan.vue'),
           },
         ]
       },
-      
     ]
   },
   {
