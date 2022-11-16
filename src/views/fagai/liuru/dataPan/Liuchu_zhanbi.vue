@@ -49,7 +49,7 @@ export default {
       let bar_option = {
         title: {
           left: "center",
-          text: "区县月度流出人口",
+          text: "区县月度流入人口",
           textStyle: {
             color: "#BDBDBD",
           },
@@ -138,7 +138,7 @@ export default {
       var pie_option = {
         title: {
           left: "center",
-          text: "当月流出占全市占比",
+          text: "当月流入占全市流入比值",
           textStyle: {
             color: "#BDBDBD",
           },

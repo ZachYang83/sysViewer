@@ -6,7 +6,7 @@
       style="bottom: 20px; left: 10px; width: 200px; height: auto"
     >
     </Legend>
-    <div class="timeLine">
+    <div class="timeLine" @changeData="changeData">
       <Timeline @changeData="changeLayer"></Timeline>
     </div>
     <div class="dataPan" v-show="showData" v-bind:class="{ active: showData }">
@@ -55,17 +55,18 @@ import {
   addgeojson_L,
 } from "utils/loadLayer.js";
 import { removeLayers } from "utils/removeLayers.js";
-import { getHuji, getQuxian } from "api/fagai/liuchu.js";
-import liuchu_hj from "../migrant/dataPan/Liuchu_huji.vue";
-import liuchu_zb from "@/views/fagai/migrant/dataPan/Liuchu_zhanbi.vue";
+import { getHuji, getQuxian } from "api/fagai/liuru.js";
+import liuchu_hj from "../liuchu/dataPan/Liuchu_huji.vue";
+import liuchu_zb from "@/views/fagai/liuchu/dataPan/Liuchu_zhanbi.vue";
 
+let monthData;
 export default {
   data() {
     return {
       showData: false,
       isLiuchu: "liuchu_hj",
       liuchuDatas:{},
-      title: "流出人口（万人）",
+      title: "流入人口（万人）",
       items: [
         {
           index: 1,
@@ -98,6 +99,11 @@ export default {
           style: "backgroundColor:RGB(6,51,154)",
         },
       ],
+      timeIndex:202202,
+      layerProp:{
+        city:'番禺区',
+        cityid:68,
+      },
     };
   },
   components: {
@@ -117,53 +123,53 @@ export default {
       init_map(window.MAP, [113.35, 22.9], 6.5);
     },
     loadWMS() {
-      window.MAP.addSource("sfg_liuchu", {
+      window.MAP.addSource("sfg_liuru", {
         type: "vector",
         scheme: "tms",
         tiles: [
-          "http://8.134.70.156:8181/geoserver/gwc/service/tms/1.0.0/gpzi%3Asfg_liuchu@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf",
+          "http://8.134.70.156:8181/geoserver/gwc/service/tms/1.0.0/gpzi%3Asfg_liuru@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf",
         ],
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_liuru",
+        source: "sfg_liuru",
+        "source-layer": "sfg_liuru",
         type: "fill",
         paint: {
           "fill-outline-color": "#455a64",
           "fill-color": [
             "case",
-            ["<", ["get", "1mon"], 5],
+            ["<", ["get", "2mon"], 5],
             "RGB(225,225,225)",
-            ["<", ["get", "1mon"], 10],
+            ["<", ["get", "2mon"], 10],
             "RGB(224,250,242)",
-            ["<", ["get", "1mon"], 15],
+            ["<", ["get", "2mon"], 15],
             "RGB(220,240,229)",
-            ["<", ["get", "1mon"], 30],
+            ["<", ["get", "2mon"], 30],
             "RGB(132,196,214)",
-            ["<", ["get", "1mon"], 60],
+            ["<", ["get", "2mon"], 60],
             "RGB(50,107,171)",
             "RGB(6,51,154)",
           ],
         },
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu_sym",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_liuru_sym",
+        source: "sfg_liuru",
+        "source-layer": "sfg_liuru",
         type: "symbol",
         layout: {
           "icon-image": "",
-          "text-field": "{county}\n{1mon}", //此属性为需要显示的字段
+          "text-field": "{county}\n{2mon}", //此属性为需要显示的字段
           "text-size": 12,
           "text-anchor": "top",
         },
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu-hl",
+        id: "sfg_liuru-hl",
         type: "line",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        source: "sfg_liuru",
+        "source-layer": "sfg_liuru",
         paint: {
           "line-color": "#18ffff",
           "line-width": 3,
@@ -177,28 +183,28 @@ export default {
       console.log(index, "index");
       switch (index) {
         case 0:
-          field = "1mon";
-          text = "{county}\n{1mon}";
-          break;
-        case 1:
           field = "2mon";
           text = "{county}\n{2mon}";
           break;
-        case 2:
+        case 1:
           field = "3mon";
           text = "{county}\n{3mon}";
           break;
-        case 3:
+        case 2:
           field = "4mon";
           text = "{county}\n{4mon}";
           break;
-        case 4:
+        case 3:
           field = "5mon";
           text = "{county}\n{5mon}";
           break;
-        case 5:
+        case 4:
           field = "6mon";
           text = "{county}\n{6mon}";
+          break;
+        case 5:
+          field = "7mon";
+          text = "{county}\n{7mon}";
           break;
         case 6:
           field = "7mon";
@@ -240,27 +246,27 @@ export default {
         "text-size": 12,
         "text-anchor": "top",
       };
-      window.MAP.removeLayer("sfg_liuchu");
+      window.MAP.removeLayer("sfg_liuru");
       window.MAP.addLayer({
-        id: "sfg_liuchu",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_liuru",
+        source: "sfg_liuru",
+        "source-layer": "sfg_liuru",
         type: "fill",
         paint: paintO,
       });
-      window.MAP.removeLayer("sfg_liuchu_sym");
+      window.MAP.removeLayer("sfg_liuru_sym");
       window.MAP.addLayer({
-        id: "sfg_liuchu_sym",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_liuru_sym",
+        source: "sfg_liuru",
+        "source-layer": "sfg_liuru",
         type: "symbol",
         layout: layoutO,
       });
-      window.MAP.removeLayer("sfg_liuchu-hl");
+      window.MAP.removeLayer("sfg_liuru-hl");
       window.MAP.addLayer({
-        id: "sfg_liuchu-hl",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_liuru-hl",
+        source: "sfg_liuru",
+        "source-layer": "sfg_liuru",
         type: "line",
         paint: {
           "line-color": "#18ffff",
@@ -275,22 +281,29 @@ export default {
     },
     getInfo(e) {
       let _this = this;
-      let monthData;
       var features = window.MAP.queryRenderedFeatures(e.point);
-      if (features[0].layer.id == "sfg_liuchu") {
+      if (features[0].layer.id == "sfg_liuru") {
         var props = features[0].properties;
-        monthData = [props['1mon'],props['2mon'],props['3mon'],props['4mon'],props['5mon'],props['6mon'],props['7mon'],props['8mon'],props['9mon']]
+        monthData = [props['2mon'],props['3mon'],props['4mon'],props['5mon'],props['6mon'],props['7mon'],props['8mon'],props['9mon'],props['10mon']]
         console.log(monthData,'dfadfsa');
-        window.MAP.setFilter("sfg_liuchu-hl", [
+        window.MAP.setFilter("sfg_liuru-hl", [
           "in",
           "cityid",
           features[0].properties.cityid,
         ]);
         console.log(props, "props");
       }
-       getQuxian("/shengfagai/liuchu-qx/getQuxian", {
-        city: props.city,
-        time: 202201,
+      _this.layerProp={
+        cityid:props.cityid,
+        city:props.city
+      }
+      this.getData()
+    },
+    getData(){
+      let _this = this;
+      getQuxian("/shengfagai/liuru-qx/getQuxian", {
+        city: _this.layerProp.city,
+        time: _this.timeIndex,
       }).then((res) => {
         _this.liuchuDatas={
           monthdata:monthData,
@@ -298,20 +311,24 @@ export default {
         }
       });
       let params = {
-        cityid: props.cityid,
-        time: 202201,
+        cityid: _this.layerProp.cityid,
+        time: _this.timeIndex,
       };
-      getHuji("/shengfagai/liuchu-hj/getHuji", params).then((res) => {
+      getHuji("/shengfagai/liuru-hj/getHuji", params).then((res) => {
         _this.liuchuDatas.huji = res.data.data[0];
         console.log(_this.liuchuDatas, "_this.liuchuDatas");
         _this.showData = true;
         _this.$refs["liuchu_pan"].setChart(_this.liuchuDatas);
       });
     },
+    changeData(index){
+      this.timeIndex = index;
+      this.getData();
+    }
   },
   destroyed() {
     let _this = this;
-    removeLayers(window.MAP, ["sfg_liuchu-hl", "sfg_liuchu_sym", "sfg_liuchu"]);
+    removeLayers(window.MAP, ["sfg_liuru-hl", "sfg_liuru_sym", "sfg_liuru"]);
     window.MAP.off("click", _this.getInfo);
   },
 };

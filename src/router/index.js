@@ -329,9 +329,14 @@ const routes = [
             component:()=>import('@/views/fagai/changzhu/Permanent.vue'),
           },
           {
-            path:'/fagai/liudong',
-            meta: { title: "流动人口", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/migrant/Liudong.vue'),
+            path:'/fagai/liuru',
+            meta: { title: "流入人口", icon: "el-icon-position" },
+            component:()=>import('@/views/fagai/liuru/Liudong.vue'),
+          },
+          {
+            path:'/fagai/liuchu',
+            meta: { title: "流出人口", icon: "el-icon-position" },
+            component:()=>import('@/views/fagai/liuchu/Liudong.vue'),
           },
           {
             path:'/fagai/industry',
