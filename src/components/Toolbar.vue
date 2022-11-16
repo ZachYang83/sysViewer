@@ -104,8 +104,8 @@ export default {
       switchMapStyle({
         map: window.MAP,
         style: item.style,
-        layersList: ["fg_gongyeyuan", "fg_gongyeyuan"],
-        sourcesList: ["fg_gongyeyuan", "fg_gongyeyuan"],
+        layersList: ["sfg_", "fg_"],
+        sourcesList: ["sfg_", "fg_"],
       });
     },
 

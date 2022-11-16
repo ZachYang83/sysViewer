@@ -62,7 +62,8 @@ export default {
   methods: {
     changeData(index) {
       console.log("子组件");
-      this.$emit("changeData", index);
+      let month = [202201,202202,202203,202204,202205,202206,202207,202208,202209,202210]
+      this.$parent.changeData(month[index]);
     },
   },
 };
