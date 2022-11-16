@@ -331,7 +331,7 @@ const routes = [
           {
             path:'/fagai/liudong',
             meta: { title: "流动人口", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/Liudong.vue'),
+            component:()=>import('@/views/fagai/migrant/Liudong.vue'),
           },
           {
             path:'/fagai/industry',
@@ -366,3 +366,5 @@ const router = new VueRouter({
 })
 
 export default router
+
+
