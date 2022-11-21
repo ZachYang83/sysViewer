@@ -49,6 +49,7 @@ export default {
       layerProp: {
         city: "广州",
         month: 202201,
+        county:"",
       },
       changzhu: {},
       showData: false,
@@ -279,6 +280,7 @@ export default {
         ]);
       }
       _this.layerProp.city = props.city;
+      _this.layerProp.county = props.county;
       this.getData();
     },
     getData() {
@@ -287,6 +289,8 @@ export default {
         month: _this.layerProp.month,
       }).then((res) => {
         _this.changzhu.shiData = res.data.data;
+        _this.changzhu.month = _this.layerProp.month;
+        _this.changzhu.county = _this.layerProp.county;
         _this.showData = true;
         _this.$refs["changzhu_pan"].setChart(_this.changzhu);
       });

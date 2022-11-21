@@ -341,12 +341,12 @@ const routes = [
           {
             path:'/fagai/industry',
             meta: { title: "工业园人流", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/Industry.vue'),
+            component:()=>import('@/views/fagai/gongyeyuan/Industry.vue'),
           },
           {
             path:'/fagai/shangquan',
             meta: { title: "商圈客流", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/Shangquan.vue'),
+            component:()=>import('@/views/fagai/business/Shangquan.vue'),
           },
         ]
       },

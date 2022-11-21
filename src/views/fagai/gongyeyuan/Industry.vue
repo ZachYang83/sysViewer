@@ -12,13 +12,13 @@
     <div class="dataPan" v-show="showData" v-bind:class="{ active: showData }">
       <div class="item changzhu">
         <div class="title">
-          <h2>{{layerProp.county}}流出人口</h2>
+          <h2>工业园工作与流动人口</h2>
         </div>
         <div class="content">
           <keep-alive>
             <component
-              :is="isLiuchu"
-              ref="liuchu_pan"
+              :is="idGongyeyuan"
+              ref="gongyeyuan_pan"
               :datas="liuchuDatas"
             ></component>
           </keep-alive>
@@ -26,17 +26,17 @@
         <div class="foot">
           <div
             class="foot-item"
-            @click="isLiuchu = 'liuchu_hj'"
-            :class="{ active: isLiuchu == 'liuchu_hj' }"
+            @click="idGongyeyuan = 'gyy_pop'"
+            :class="{ active: idGongyeyuan == 'gyy_pop' }"
           >
-            户籍
+            月度人口
           </div>
           <div
             class="foot-item"
-            @click="isLiuchu = 'liuchu_zb'"
-            :class="{ active: isLiuchu == 'liuchu_zb' }"
+            @click="idGongyeyuan = 'gyy_hj'"
+            :class="{ active: idGongyeyuan == 'gyy_hj' }"
           >
-            占比
+            工作人口户籍
           </div>
         </div>
       </div>
@@ -55,63 +55,63 @@ import {
   addgeojson_L,
 } from "utils/loadLayer.js";
 import { removeLayers } from "utils/removeLayers.js";
-import { getHuji, getQuxian } from "api/fagai/liuchu.js";
-import liuchu_hj from "../liuchu/dataPan/Liuchu_huji.vue";
-import liuchu_zb from "@/views/fagai/liuchu/dataPan/Liuchu_zhanbi.vue";
+import { getHuji } from "api/fagai/industry.js";
+import gyy_hj from "../gongyeyuan/dataPan/Huji.vue";
+import gyy_pop from "@/views/fagai/gongyeyuan/dataPan/Chart.vue";
 
-let monthData;
+let workData;
+let liudongData;
 export default {
   data() {
     return {
       showData: false,
-      isLiuchu: "liuchu_hj",
-      liuchuDatas:{},
-      title: "流出人口（万人）",
+      idGongyeyuan: "gyy_pop",
+      liuchuDatas: {},
+      title: "工作人口（万人）",
       items: [
         {
           index: 1,
-          text: "0 - 5",
-          style: "backgroundColor:RGB(225,225,225)",
+          text: "0 - 20",
+          style: "backgroundColor:RGBA(225,225,225)",
         },
         {
           index: 2,
-          text: "5 - 10",
-          style: "backgroundColor:RGB(224,250,242)",
+          text: "20 - 50",
+          style: "backgroundColor:RGBA(224,250,242)",
         },
         {
           index: 3,
-          text: "10 - 15",
-          style: "backgroundColor:RGB(220,240,229)",
+          text: "50 - 100",
+          style: "backgroundColor:RGBA(220,240,229)",
         },
         {
           index: 4,
-          text: "15 - 30",
-          style: "backgroundColor:RGB(132,196,214)",
+          text: "100 - 200",
+          style: "backgroundColor:RGBA(132,196,214)",
         },
         {
           index: 5,
-          text: "30 - 60",
-          style: "backgroundColor:RGB(50,107,171)",
+          text: "200 - 300",
+          style: "backgroundColor:RGBA(50,107,171)",
         },
         {
           index: 6,
-          text: "60 - 120",
-          style: "backgroundColor:RGB(6,51,154)",
+          text: "300以上",
+          style: "backgroundColor:RGBA(6,51,154)",
         },
       ],
-      timeIndex:202201,
-      layerProp:{
-        city:'番禺区',
-        cityid:68,
-        county:'广州番禺区'
+      timeIndex: 202201,
+      layerProp: {
+        name: "广州-天河·公园智谷片区",
+        id: 142,
       },
     };
   },
   components: {
     Legend,
     Timeline,
-    liuchu_hj,
-    liuchu_zb,
+    gyy_hj,
+    gyy_pop,
   },
   mounted() {
     this.init();
@@ -124,58 +124,72 @@ export default {
       init_map(window.MAP, [113.35, 22.9], 6.5);
     },
     loadWMS() {
-      window.MAP.addSource("sfg_liuchu", {
+      window.MAP.addSource("sfg_gongyeyuan", {
         type: "vector",
         scheme: "tms",
         tiles: [
-          "http://8.134.70.156:8181/geoserver/gwc/service/tms/1.0.0/gpzi%3Asfg_liuchu@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf",
+          "http://8.134.70.156:8181/geoserver/gwc/service/tms/1.0.0/gpzi%3Asfg_gongyeyuan@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf",
         ],
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_gongyeyuan",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
         type: "fill",
         paint: {
           "fill-outline-color": "#455a64",
           "fill-color": [
             "case",
-            ["<", ["get", "1mon"], 5],
-            "RGB(225,225,225)",
-            ["<", ["get", "1mon"], 10],
-            "RGB(224,250,242)",
-            ["<", ["get", "1mon"], 15],
-            "RGB(220,240,229)",
-            ["<", ["get", "1mon"], 30],
-            "RGB(132,196,214)",
-            ["<", ["get", "1mon"], 60],
-            "RGB(50,107,171)",
-            "RGB(6,51,154)",
+            ["<", ["get", "w202201"], 20],
+            "RGBA(225,225,225,0.7)",
+            ["<", ["get", "w202201"], 50],
+            "RGBA(224,250,242,0.7)",
+            ["<", ["get", "w202201"], 100],
+            "RGBA(220,240,229,0.7)",
+            ["<", ["get", "w202201"], 200],
+            "RGBA(132,196,214,0.7)",
+            ["<", ["get", "w202201"], 300],
+            "RGBA(50,107,171,0.7)",
+            "RGBA(6,51,154,0.7)",
           ],
         },
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu_sym",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_gongyeyuan_sym",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
         type: "symbol",
         layout: {
           "icon-image": "",
-          "text-field": "{county}\n{1mon}", //此属性为需要显示的字段
+          "text-field": "{Name}\n{w202201}", //此属性为需要显示的字段
           "text-size": 12,
           "text-anchor": "top",
         },
+         paint: {
+          "text-color": "#ffffff",
+        },
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu-hl",
+        id: "sfg_gongyeyuan-line",
         type: "line",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
+        paint: {
+          "line-color": "#ff4081",
+          "line-width": 1,
+        },
+      });
+      window.MAP.addLayer({
+        id: "sfg_gongyeyuan-hl",
+        type: "line",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
         paint: {
           "line-color": "#18ffff",
           "line-width": 3,
+          // "text-color": "#ffff00",
         },
-        filter: ["in", "cityid", ""],
+        filter: ["in", "id", ""],
       });
     },
     changeLayer(index) {
@@ -184,61 +198,61 @@ export default {
       console.log(index, "index");
       switch (index) {
         case 0:
-          field = "1mon";
-          text = "{county}\n{1mon}";
+          field = "w202201";
+          text = "{Name}\n{w202201}";
           break;
         case 1:
-          field = "2mon";
-          text = "{county}\n{2mon}";
+          field = "w202202";
+          text = "{Name}\n{w202202}";
           break;
         case 2:
-          field = "3mon";
-          text = "{county}\n{3mon}";
+          field = "w202203";
+          text = "{Name}\n{w202203}";
           break;
         case 3:
-          field = "4mon";
-          text = "{county}\n{4mon}";
+          field = "w202204";
+          text = "{Name}\n{w202204}";
           break;
         case 4:
-          field = "5mon";
-          text = "{county}\n{5mon}";
+          field = "w202205";
+          text = "{Name}\n{w202205}";
           break;
         case 5:
-          field = "6mon";
-          text = "{county}\n{6mon}";
+          field = "w202206";
+          text = "{Name}\n{w202206}";
           break;
         case 6:
-          field = "7mon";
-          text = "{county}\n{7mon}";
+          field = "w202207";
+          text = "{Name}\n{w202207}";
           break;
         case 7:
-          field = "8mon";
-          text = "{county}\n{8mon}";
+          field = "w202208";
+          text = "{Name}\n{w202208}";
           break;
         case 8:
-          field = "9mon";
-          text = "{county}\n{9mon}";
+          field = "w202209";
+          text = "{Name}\n{w202209}";
           break;
         case 9:
-          field = "10mon";
-          text = "{county}\n{10mon}";
+          field = "w202210";
+          text = "{Name}\n{w202210}";
           break;
       }
       var paintO = {
         "fill-outline-color": "#455a64",
         "fill-color": [
           "case",
-          ["<", ["get", field], 5],
-          "RGB(225,225,225)", //<10.8
-          ["<", ["get", field], 10],
-          "RGB(224,250,242)", //>=10.8 & <17.2
-          ["<", ["get", field], 15],
-          "RGB(220,240,229)",
-          ["<", ["get", field], 30],
-          "RGB(132,196,214)",
-          ["<", ["get", field], 60],
-          "RGB(50,107,171)",
-          "RGB(6,51,154)", // 默认值, >=50.1
+          ["<", ["get", field], 20],
+          "RGBA(225,225,225,0.7)", //<10.8
+          ["<", ["get", field], 50],
+          "RGBA(224,250,242,0.7)", //>=10.8 & <17.2
+          ["<", ["get", field], 100],
+          "RGBA(220,240,229,0.7)",
+          ["<", ["get", field], 200],
+          "RGBA(132,196,214,0.7)",
+          ["<", ["get", field], 300],
+          "RGBA(50,107,171,0.7)",
+          "RGBA(6,51,154,0.7)", // 默认值, >=50.1
         ],
       };
       var layoutO = {
@@ -247,33 +261,33 @@ export default {
         "text-size": 12,
         "text-anchor": "top",
       };
-      window.MAP.removeLayer("sfg_liuchu");
+      window.MAP.removeLayer("sfg_gongyeyuan");
       window.MAP.addLayer({
-        id: "sfg_liuchu",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_gongyeyuan",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
         type: "fill",
         paint: paintO,
       });
-      window.MAP.removeLayer("sfg_liuchu_sym");
+      window.MAP.removeLayer("sfg_gongyeyuan_sym");
       window.MAP.addLayer({
-        id: "sfg_liuchu_sym",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_gongyeyuan_sym",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
         type: "symbol",
         layout: layoutO,
       });
-      window.MAP.removeLayer("sfg_liuchu-hl");
+      window.MAP.removeLayer("sfg_gongyeyuan-hl");
       window.MAP.addLayer({
-        id: "sfg_liuchu-hl",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_gongyeyuan-hl",
+        source: "sfg_gongyeyuan",
+        "source-layer": "sfg_gongyeyuan",
         type: "line",
         paint: {
           "line-color": "#18ffff",
           "line-width": 3,
         },
-        filter: ["in", "cityid", ""],
+        filter: ["in", "id", ""],
       });
     },
     mouseEvent() {
@@ -283,57 +297,77 @@ export default {
     getInfo(e) {
       let _this = this;
       var features = window.MAP.queryRenderedFeatures(e.point);
-      if (features[0].layer.id == "sfg_liuchu") {
+      if (features[0].layer.id == "sfg_gongyeyuan") {
         var props = features[0].properties;
-        monthData = [props['1mon'],props['2mon'],props['3mon'],props['4mon'],props['5mon'],props['6mon'],props['7mon'],props['8mon'],props['9mon']]
-        console.log(monthData,'dfadfsa');
-        window.MAP.setFilter("sfg_liuchu-hl", [
+        workData = [
+          props["w202201"],
+          props["w202202"],
+          props["w202203"],
+          props["w202204"],
+          props["w202205"],
+          props["w202206"],
+          props["w202207"],
+          props["w202208"],
+          props["w202209"],
+          props["w202210"],
+        ];
+        liudongData = [
+          props["l202201"],
+          props["l202202"],
+          props["l202203"],
+          props["l202204"],
+          props["l202205"],
+          props["l202206"],
+          props["l202207"],
+          props["l202208"],
+          props["l202209"],
+          props["l202210"],
+        ];
+        console.log(workData, "dfadfsa");
+        window.MAP.setFilter("sfg_gongyeyuan-hl", [
           "in",
-          "cityid",
-          features[0].properties.cityid,
+          "id",
+          features[0].properties.id,
         ]);
         console.log(props, "props");
       }
-      _this.layerProp={
-        cityid:props.cityid,
-        city:props.city,
-        county:props.county,
-      }
-      this.getData()
+      _this.layerProp = {
+        id: props.id,
+        name: props.name,
+      };
+      this.getData();
     },
-    getData(){
+    getData() {
       let _this = this;
-      getQuxian("/shengfagai/liuchu-qx/getQuxian", {
-        city: _this.layerProp.city,
+      getHuji("/shengfagai/gongyeyuan-hj/getGyyHuji", {
+        indId: _this.layerProp.id,
         time: _this.timeIndex,
       }).then((res) => {
-        _this.liuchuDatas={
-          monthdata:monthData,
-          countydata:res.data.data,
-          county:_this.layerProp.county
-        }
-      });
-      let params = {
-        cityid: _this.layerProp.cityid,
-        time: _this.timeIndex,
-      };
-      getHuji("/shengfagai/liuchu-hj/getHuji", params).then((res) => {
-        _this.liuchuDatas.huji = res.data.data[0];
-        console.log(_this.liuchuDatas, "_this.liuchuDatas");
+        _this.liuchuDatas = {
+          workData: workData,
+          liudongData: liudongData,
+          hujidata: res.data.data[0],
+        };
+        console.log(res.data, "res.data.data[0]");
         _this.showData = true;
-        _this.$refs["liuchu_pan"].setChart(_this.liuchuDatas);
+        _this.$refs["gongyeyuan_pan"].setChart(_this.liuchuDatas);
       });
     },
-    changeData(index){
+    changeData(index) {
       this.timeIndex = index;
-      console.log('父组件');
-      console.log(this.timeIndex,'this.timeIndex');
+      console.log("父组件");
+      console.log(this.timeIndex, "this.timeIndex");
       this.getData();
-    }
+    },
   },
   destroyed() {
     let _this = this;
-    removeLayers(window.MAP, ["sfg_liuchu-hl", "sfg_liuchu_sym", "sfg_liuchu"]);
+    removeLayers(window.MAP, [
+      "sfg_gongyeyuan-hl",
+      "sfg_gongyeyuan_sym",
+      "sfg_gongyeyuan-line",
+      "sfg_gongyeyuan",
+    ]);
     window.MAP.off("click", _this.getInfo);
   },
 };
@@ -417,7 +451,7 @@ export default {
       width: 100%;
       height: 50px;
       text-align: center;
-      background-color: RGBA(8, 32, 52, 0.8);
+      background-color: RGBA(8, 32, 52, 0.7);
       line-height: 50px;
       color: #bdbdbd;
     }
@@ -434,7 +468,7 @@ export default {
       display: flex;
       width: 100%;
       height: 40px;
-      background-color: RGBA(8, 32, 52, 0.8);
+      background-color: RGBA(8, 32, 52, 0.7);
     }
 
     .foot-item {

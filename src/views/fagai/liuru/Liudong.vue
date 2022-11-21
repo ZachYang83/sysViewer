@@ -12,13 +12,13 @@
     <div class="dataPan" v-show="showData" v-bind:class="{ active: showData }">
       <div class="item changzhu">
         <div class="title">
-          <h2>流出人口</h2>
+          <h2>{{layerProp.county}}流入人口</h2>
         </div>
         <div class="content">
           <keep-alive>
             <component
               :is="isLiuchu"
-              ref="liuchu_pan"
+              ref="liuru_pan"
               :datas="liuchuDatas"
             ></component>
           </keep-alive>
@@ -56,8 +56,8 @@ import {
 } from "utils/loadLayer.js";
 import { removeLayers } from "utils/removeLayers.js";
 import { getHuji, getQuxian } from "api/fagai/liuru.js";
-import liuchu_hj from "../liuchu/dataPan/Liuchu_huji.vue";
-import liuchu_zb from "@/views/fagai/liuchu/dataPan/Liuchu_zhanbi.vue";
+import liuchu_hj from "../liuru/dataPan/Liuchu_huji.vue";
+import liuchu_zb from "@/views/fagai/liuru/dataPan/Liuchu_zhanbi.vue";
 
 let monthData;
 export default {
@@ -103,6 +103,7 @@ export default {
       layerProp:{
         city:'番禺区',
         cityid:68,
+        county:'广州番禺区'
       },
     };
   },
@@ -295,7 +296,8 @@ export default {
       }
       _this.layerProp={
         cityid:props.cityid,
-        city:props.city
+        city:props.city,
+        county:props.county,
       }
       this.getData()
     },
@@ -308,6 +310,7 @@ export default {
         _this.liuchuDatas={
           monthdata:monthData,
           countydata:res.data.data,
+          county:_this.layerProp.county
         }
       });
       let params = {
@@ -318,7 +321,7 @@ export default {
         _this.liuchuDatas.huji = res.data.data[0];
         console.log(_this.liuchuDatas, "_this.liuchuDatas");
         _this.showData = true;
-        _this.$refs["liuchu_pan"].setChart(_this.liuchuDatas);
+        _this.$refs["liuru_pan"].setChart(_this.liuchuDatas);
       });
     },
     changeData(index){

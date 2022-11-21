@@ -12,31 +12,31 @@
     <div class="dataPan" v-show="showData" v-bind:class="{ active: showData }">
       <div class="item changzhu">
         <div class="title">
-          <h2>{{layerProp.county}}流出人口</h2>
+          <h2>商圈客流</h2>
         </div>
         <div class="content">
           <keep-alive>
             <component
-              :is="isLiuchu"
-              ref="liuchu_pan"
+              :is="idGongyeyuan"
+              ref="shangquan_pan"
               :datas="liuchuDatas"
             ></component>
           </keep-alive>
         </div>
         <div class="foot">
-          <div
+            <div
             class="foot-item"
-            @click="isLiuchu = 'liuchu_hj'"
-            :class="{ active: isLiuchu == 'liuchu_hj' }"
+            @click="idGongyeyuan = 'gyy_pop'"
+            :class="{ active: idGongyeyuan == 'gyy_pop' }"
           >
-            户籍
+            月度人口
           </div>
           <div
             class="foot-item"
-            @click="isLiuchu = 'liuchu_zb'"
-            :class="{ active: isLiuchu == 'liuchu_zb' }"
+            @click="idGongyeyuan = 'gyy_hj'"
+            :class="{ active: idGongyeyuan == 'gyy_hj' }"
           >
-            占比
+            客流人口户籍
           </div>
         </div>
       </div>
@@ -55,63 +55,63 @@ import {
   addgeojson_L,
 } from "utils/loadLayer.js";
 import { removeLayers } from "utils/removeLayers.js";
-import { getHuji, getQuxian } from "api/fagai/liuchu.js";
-import liuchu_hj from "../liuchu/dataPan/Liuchu_huji.vue";
-import liuchu_zb from "@/views/fagai/liuchu/dataPan/Liuchu_zhanbi.vue";
+import { getHuji } from "api/fagai/shangquan.js";
+import gyy_hj from "../business/dataPan/Huji.vue";
+import gyy_pop from "@/views/fagai/business/dataPan/Chart.vue";
 
-let monthData;
+let workData;
+let liudongData;
 export default {
   data() {
     return {
       showData: false,
-      isLiuchu: "liuchu_hj",
+      idGongyeyuan: "gyy_pop",
       liuchuDatas:{},
-      title: "流出人口（万人）",
+      title: "客流人口（万人）",
       items: [
         {
           index: 1,
-          text: "0 - 5",
-          style: "backgroundColor:RGB(225,225,225)",
+          text: "0 - 10",
+          style: "backgroundColor:RGBA(225,225,225)",
         },
         {
           index: 2,
-          text: "5 - 10",
-          style: "backgroundColor:RGB(224,250,242)",
+          text: "10 - 20",
+          style: "backgroundColor:RGBA(224,250,242)",
         },
         {
           index: 3,
-          text: "10 - 15",
-          style: "backgroundColor:RGB(220,240,229)",
+          text: "20 - 30",
+          style: "backgroundColor:RGBA(220,240,229)",
         },
         {
           index: 4,
-          text: "15 - 30",
-          style: "backgroundColor:RGB(132,196,214)",
+          text: "30 - 50",
+          style: "backgroundColor:RGBA(132,196,214)",
         },
         {
           index: 5,
-          text: "30 - 60",
-          style: "backgroundColor:RGB(50,107,171)",
+          text: "50 - 100",
+          style: "backgroundColor:RGBA(50,107,171)",
         },
         {
           index: 6,
-          text: "60 - 120",
-          style: "backgroundColor:RGB(6,51,154)",
+          text: "100以上",
+          style: "backgroundColor:RGBA(6,51,154)",
         },
       ],
       timeIndex:202201,
       layerProp:{
-        city:'番禺区',
-        cityid:68,
-        county:'广州番禺区'
+        name:'天河城',
+        busId:356,
       },
     };
   },
   components: {
     Legend,
     Timeline,
-    liuchu_hj,
-    liuchu_zb,
+    gyy_hj,
+    gyy_pop,
   },
   mounted() {
     this.init();
@@ -124,58 +124,71 @@ export default {
       init_map(window.MAP, [113.35, 22.9], 6.5);
     },
     loadWMS() {
-      window.MAP.addSource("sfg_liuchu", {
+      window.MAP.addSource("sfg_shangquan", {
         type: "vector",
         scheme: "tms",
         tiles: [
-          "http://8.134.70.156:8181/geoserver/gwc/service/tms/1.0.0/gpzi%3Asfg_liuchu@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf",
+          "http://8.134.70.156:8181/geoserver/gwc/service/tms/1.0.0/gpzi%3Asfg_shangquan@EPSG%3A900913@pbf/{z}/{x}/{y}.pbf",
         ],
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_shangquan",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
         type: "fill",
         paint: {
           "fill-outline-color": "#455a64",
           "fill-color": [
             "case",
-            ["<", ["get", "1mon"], 5],
-            "RGB(225,225,225)",
-            ["<", ["get", "1mon"], 10],
-            "RGB(224,250,242)",
-            ["<", ["get", "1mon"], 15],
-            "RGB(220,240,229)",
-            ["<", ["get", "1mon"], 30],
-            "RGB(132,196,214)",
-            ["<", ["get", "1mon"], 60],
-            "RGB(50,107,171)",
-            "RGB(6,51,154)",
+            ["<", ["get", "mon1"], 10],
+            "RGBA(225,225,225,0.7)",
+            ["<", ["get", "mon1"], 20],
+            "RGBA(224,250,242,0.7)",
+            ["<", ["get", "mon1"], 30],
+            "RGBA(220,240,229,0.7)",
+            ["<", ["get", "mon1"], 50],
+            "RGBA(132,196,214,0.7)",
+            ["<", ["get", "mon1"], 100],
+            "RGBA(50,107,171,0.7)",
+            "RGBA(6,51,154,0.7)",
           ],
         },
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu_sym",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_shangquan_sym",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
         type: "symbol",
         layout: {
           "icon-image": "",
-          "text-field": "{county}\n{1mon}", //此属性为需要显示的字段
+          "text-field": "{Name}\n{mon1}", //此属性为需要显示的字段
           "text-size": 12,
           "text-anchor": "top",
         },
+         paint: {
+          "text-color": "#ffffff",
+        },
       });
       window.MAP.addLayer({
-        id: "sfg_liuchu-hl",
+        id: "sfg_shangquan-line",
         type: "line",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
+        paint: {
+          "line-color": "#ff4081",
+          "line-width": 1,
+        },
+      });
+      window.MAP.addLayer({
+        id: "sfg_shangquan-hl",
+        type: "line",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
         paint: {
           "line-color": "#18ffff",
           "line-width": 3,
         },
-        filter: ["in", "cityid", ""],
+        filter: ["in", "id", ""],
       });
     },
     changeLayer(index) {
@@ -184,61 +197,61 @@ export default {
       console.log(index, "index");
       switch (index) {
         case 0:
-          field = "1mon";
-          text = "{county}\n{1mon}";
+          field = "mon1";
+          text = "{Name}\n{mon1}";
           break;
         case 1:
-          field = "2mon";
-          text = "{county}\n{2mon}";
+          field = "mon2";
+          text = "{Name}\n{mon2}";
           break;
         case 2:
-          field = "3mon";
-          text = "{county}\n{3mon}";
+          field = "mon3";
+          text = "{Name}\n{mon3}";
           break;
         case 3:
-          field = "4mon";
-          text = "{county}\n{4mon}";
+          field = "mon4";
+          text = "{Name}\n{mon4}";
           break;
         case 4:
-          field = "5mon";
-          text = "{county}\n{5mon}";
+          field = "mon5";
+          text = "{Name}\n{mon5}";
           break;
         case 5:
-          field = "6mon";
-          text = "{county}\n{6mon}";
+          field = "mon6";
+          text = "{Name}\n{mon6}";
           break;
         case 6:
-          field = "7mon";
-          text = "{county}\n{7mon}";
+          field = "mon7";
+          text = "{Name}\n{mon7}";
           break;
         case 7:
-          field = "8mon";
-          text = "{county}\n{8mon}";
+          field = "mon8";
+          text = "{Name}\n{mon8}";
           break;
         case 8:
-          field = "9mon";
-          text = "{county}\n{9mon}";
+          field = "mon9";
+          text = "{Name}\n{mon9}";
           break;
         case 9:
-          field = "10mon";
-          text = "{county}\n{10mon}";
+          field = "mon10";
+          text = "{Name}\n{mon10}";
           break;
       }
       var paintO = {
         "fill-outline-color": "#455a64",
         "fill-color": [
           "case",
-          ["<", ["get", field], 5],
-          "RGB(225,225,225)", //<10.8
           ["<", ["get", field], 10],
-          "RGB(224,250,242)", //>=10.8 & <17.2
-          ["<", ["get", field], 15],
-          "RGB(220,240,229)",
+          "RGBA(225,225,225,0.7)", //<10.8
+          ["<", ["get", field], 20],
+          "RGBA(224,250,242,0.7)", //>=10.8 & <17.2
           ["<", ["get", field], 30],
-          "RGB(132,196,214)",
-          ["<", ["get", field], 60],
-          "RGB(50,107,171)",
-          "RGB(6,51,154)", // 默认值, >=50.1
+          "RGBA(220,240,229,0.7)",
+          ["<", ["get", field], 50],
+          "RGBA(132,196,214,0.7)",
+          ["<", ["get", field], 100],
+          "RGBA(50,107,171,0.7)",
+          "RGBA(6,51,154,0.7)", // 默认值, >=50.1
         ],
       };
       var layoutO = {
@@ -247,33 +260,33 @@ export default {
         "text-size": 12,
         "text-anchor": "top",
       };
-      window.MAP.removeLayer("sfg_liuchu");
+      window.MAP.removeLayer("sfg_shangquan");
       window.MAP.addLayer({
-        id: "sfg_liuchu",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_shangquan",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
         type: "fill",
         paint: paintO,
       });
-      window.MAP.removeLayer("sfg_liuchu_sym");
+      window.MAP.removeLayer("sfg_gongyeyuan_sym");
       window.MAP.addLayer({
-        id: "sfg_liuchu_sym",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_gongyeyuan_sym",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
         type: "symbol",
         layout: layoutO,
       });
-      window.MAP.removeLayer("sfg_liuchu-hl");
+      window.MAP.removeLayer("sfg_shangquan-hl");
       window.MAP.addLayer({
-        id: "sfg_liuchu-hl",
-        source: "sfg_liuchu",
-        "source-layer": "sfg_liuchu",
+        id: "sfg_shangquan-hl",
+        source: "sfg_shangquan",
+        "source-layer": "sfg_shangquan",
         type: "line",
         paint: {
           "line-color": "#18ffff",
           "line-width": 3,
         },
-        filter: ["in", "cityid", ""],
+        filter: ["in", "id", ""],
       });
     },
     mouseEvent() {
@@ -283,45 +296,36 @@ export default {
     getInfo(e) {
       let _this = this;
       var features = window.MAP.queryRenderedFeatures(e.point);
-      if (features[0].layer.id == "sfg_liuchu") {
+      if (features[0].layer.id == "sfg_shangquan") {
         var props = features[0].properties;
-        monthData = [props['1mon'],props['2mon'],props['3mon'],props['4mon'],props['5mon'],props['6mon'],props['7mon'],props['8mon'],props['9mon']]
-        console.log(monthData,'dfadfsa');
-        window.MAP.setFilter("sfg_liuchu-hl", [
+        workData = [props['mon1'],props['mon2'],props['mon3'],props['mon4'],props['mon5'],props['mon6'],props['mon7'],props['mon8'],props['mon9'],props['mon10']]
+        console.log(workData,'dfadfsa');
+        window.MAP.setFilter("sfg_shangquan-hl", [
           "in",
-          "cityid",
-          features[0].properties.cityid,
+          "id",
+          features[0].properties.id,
         ]);
         console.log(props, "props");
       }
       _this.layerProp={
-        cityid:props.cityid,
-        city:props.city,
-        county:props.county,
+        busId:props.id,
+        name:props.name
       }
       this.getData()
     },
     getData(){
       let _this = this;
-      getQuxian("/shengfagai/liuchu-qx/getQuxian", {
-        city: _this.layerProp.city,
+      getHuji("/shengfagai/shangquan-hj/getSqHuji", {
+        busId: _this.layerProp.busId,
         time: _this.timeIndex,
       }).then((res) => {
         _this.liuchuDatas={
-          monthdata:monthData,
-          countydata:res.data.data,
-          county:_this.layerProp.county
+          workData:workData,
+          hujidata:res.data.data[0],
         }
-      });
-      let params = {
-        cityid: _this.layerProp.cityid,
-        time: _this.timeIndex,
-      };
-      getHuji("/shengfagai/liuchu-hj/getHuji", params).then((res) => {
-        _this.liuchuDatas.huji = res.data.data[0];
-        console.log(_this.liuchuDatas, "_this.liuchuDatas");
+        console.log(res.data,'res.data.data[0]');
         _this.showData = true;
-        _this.$refs["liuchu_pan"].setChart(_this.liuchuDatas);
+        _this.$refs["shangquan_pan"].setChart(_this.liuchuDatas);
       });
     },
     changeData(index){
@@ -333,7 +337,7 @@ export default {
   },
   destroyed() {
     let _this = this;
-    removeLayers(window.MAP, ["sfg_liuchu-hl", "sfg_liuchu_sym", "sfg_liuchu"]);
+    removeLayers(window.MAP, ["sfg_shangquan-hl", "sfg_shangquan_sym", "sfg_shangquan-line","sfg_shangquan"]);
     window.MAP.off("click", _this.getInfo);
   },
 };
@@ -417,7 +421,7 @@ export default {
       width: 100%;
       height: 50px;
       text-align: center;
-      background-color: RGBA(8, 32, 52, 0.8);
+      background-color: RGBA(8, 32, 52, 0.7);
       line-height: 50px;
       color: #bdbdbd;
     }
@@ -434,7 +438,7 @@ export default {
       display: flex;
       width: 100%;
       height: 40px;
-      background-color: RGBA(8, 32, 52, 0.8);
+      background-color: RGBA(8, 32, 52, 0.7);
     }
 
     .foot-item {
@@ -463,3 +467,6 @@ export default {
   }
 }
 </style>
+
+
+
