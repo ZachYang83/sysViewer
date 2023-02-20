@@ -140,15 +140,15 @@ export default {
           "fill-outline-color": "#455a64",
           "fill-color": [
             "case",
-            ["<", ["get", "w202201"], 20],
+            ["<", ["get", "work1"], 20],
             "RGBA(225,225,225,0.7)",
-            ["<", ["get", "w202201"], 50],
+            ["<", ["get", "work1"], 50],
             "RGBA(224,250,242,0.7)",
-            ["<", ["get", "w202201"], 100],
+            ["<", ["get", "work1"], 100],
             "RGBA(220,240,229,0.7)",
-            ["<", ["get", "w202201"], 200],
+            ["<", ["get", "work1"], 200],
             "RGBA(132,196,214,0.7)",
-            ["<", ["get", "w202201"], 300],
+            ["<", ["get", "work1"], 300],
             "RGBA(50,107,171,0.7)",
             "RGBA(6,51,154,0.7)",
           ],
@@ -161,7 +161,7 @@ export default {
         type: "symbol",
         layout: {
           "icon-image": "",
-          "text-field": "{Name}\n{w202201}", //此属性为需要显示的字段
+          "text-field": "{Name}\n{work1}", //此属性为需要显示的字段
           "text-size": 12,
           "text-anchor": "top",
         },
@@ -198,44 +198,44 @@ export default {
       console.log(index, "index");
       switch (index) {
         case 0:
-          field = "w202201";
-          text = "{Name}\n{w202201}";
+          field = "work1";
+          text = "{Name}\n{work1}";
           break;
         case 1:
-          field = "w202202";
-          text = "{Name}\n{w202202}";
+          field = "work2";
+          text = "{Name}\n{work2}";
           break;
         case 2:
-          field = "w202203";
-          text = "{Name}\n{w202203}";
+          field = "work3";
+          text = "{Name}\n{work3}";
           break;
         case 3:
-          field = "w202204";
-          text = "{Name}\n{w202204}";
+          field = "work4";
+          text = "{Name}\n{work4}";
           break;
         case 4:
-          field = "w202205";
-          text = "{Name}\n{w202205}";
+          field = "work5";
+          text = "{Name}\n{work5}";
           break;
         case 5:
-          field = "w202206";
-          text = "{Name}\n{w202206}";
+          field = "work6";
+          text = "{Name}\n{work6}";
           break;
         case 6:
-          field = "w202207";
-          text = "{Name}\n{w202207}";
+          field = "work7";
+          text = "{Name}\n{work7}";
           break;
         case 7:
-          field = "w202208";
-          text = "{Name}\n{w202208}";
+          field = "work8";
+          text = "{Name}\n{work8}";
           break;
         case 8:
-          field = "w202209";
-          text = "{Name}\n{w202209}";
+          field = "work9";
+          text = "{Name}\n{work9}";
           break;
         case 9:
           field = "w202210";
-          text = "{Name}\n{w202210}";
+          text = "{Name}\n{work10}";
           break;
       }
       var paintO = {
@@ -300,28 +300,28 @@ export default {
       if (features[0].layer.id == "sfg_gongyeyuan") {
         var props = features[0].properties;
         workData = [
-          props["w202201"],
-          props["w202202"],
-          props["w202203"],
-          props["w202204"],
-          props["w202205"],
-          props["w202206"],
-          props["w202207"],
-          props["w202208"],
-          props["w202209"],
-          props["w202210"],
+          props["work1"],
+          props["work2"],
+          props["work3"],
+          props["work4"],
+          props["work5"],
+          props["work6"],
+          props["work7"],
+          props["work8"],
+          props["work9"],
+          props["work10"],
         ];
         liudongData = [
-          props["l202201"],
-          props["l202202"],
-          props["l202203"],
-          props["l202204"],
-          props["l202205"],
-          props["l202206"],
-          props["l202207"],
-          props["l202208"],
-          props["l202209"],
-          props["l202210"],
+          props["flow1"],
+          props["flow2"],
+          props["flow3"],
+          props["flow4"],
+          props["flow5"],
+          props["flow6"],
+          props["flow7"],
+          props["flow8"],
+          props["flow9"],
+          props["flow10"],
         ];
         console.log(workData, "dfadfsa");
         window.MAP.setFilter("sfg_gongyeyuan-hl", [
