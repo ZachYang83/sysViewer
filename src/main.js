@@ -9,16 +9,25 @@ import dataV from '@jiaminghi/data-view'
 import '@/assets/scss/common.scss';
 import '@/assets/scss/style.scss';
 import '@/assets/css/ali-icons/iconfont.css'
+import '@/assets/scss/antd.scss'
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
+import "vue-easytable/libs/theme-default/index.css";
+// 引入组件库
+import VueEasytable from "vue-easytable";
 import * as echarts from "echarts";
 window.echarts = echarts;
 
+Vue.use(VueEasytable);
 Vue.use(ElementUI);
-Vue.use(dataV)
+Vue.use(dataV);
+Vue.use(Antd);
 Vue.config.productionTip = false
 window.MAP = null;
 window.PANEL_MAP = null;
-
-
+// Vue.prototype.$message = Message;
+// Vue.prototype.$confirm = MessageBox.confirm;
+// Vue.prototype.$antdconfirm = Vue.prototype.$confirm;
 Vue.prototype.axios = axios;
 Vue.prototype.$echarts = echarts
 

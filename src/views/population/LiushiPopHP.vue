@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     init() {
-      init_map(window.MAP, [113.39,23.12], 13);
+      init_map(window.MAP, [113.697084, 23.240441], 8.5);
     },
     init_layer() {
       var paint = {
@@ -112,7 +112,7 @@ export default {
           "text-anchor": "top",
         },
         paint:{
-            'text-color':'#000',
+            'text-color':'#fff',
             'text-translate-anchor': 'map'
         }
       });

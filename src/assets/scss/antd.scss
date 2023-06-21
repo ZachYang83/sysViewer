@@ -1,0 +1,63 @@
+.vscroll::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+.vscroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+}
+
+.ant-list-pagination {
+    margin: 15px 10px !important;
+}
+
+.ant-pagination-item {
+    height: 24px !important;
+    min-width: 24px !important;
+    line-height: 24px !important;
+    margin-right: 5px !important;
+}
+
+.ant-pagination-prev {
+    height: 24px !important;
+    min-width: 24px !important;
+    line-height: 24px !important;
+    margin-right: 5px !important;
+}
+
+.ant-pagination-next {
+    height: 24px !important;
+    min-width: 24px !important;
+    line-height: 24px !important;
+    margin-right: 5px !important;
+}
+
+.ant-card-head {
+    min-height: 41px !important;
+    height: 35px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+    font-size: 16px !important;
+    font-weight:bolder !important;
+    line-height: 35px !important;
+    border-bottom: none !important;
+}
+
+.ant-card-head-title {
+    padding: 2px 0 !important;
+}
+
+.ant-card-body{
+    padding:10px 24px 10px 24px !important;
+    font-size: 15px !important;
+    font-weight:bolder !important;
+}
+
+.ant-card-bordered{
+    padding:2px !important;
+    border: 1px solid RGB(69,181,216) !important;
+    background-color: RGBA(192,230,254,0.5) !important;
+}

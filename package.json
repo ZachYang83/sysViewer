@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "serve": "vue-cli-service serve --mode development",
+    "build": "vue-cli-service build --mode production"
   },
   "dependencies": {
     "@jiaminghi/data-view": "^2.10.0",
     "@turf/turf": "^6.5.0",
+    "ant-design-vue": "^1.7.8",
     "axios": "^0.27.2",
     "core-js": "^3.6.5",
     "deck.gl": "^8.8.6",
@@ -23,6 +24,7 @@
     "turf": "^3.0.14",
     "typescript": "^4.6.4",
     "vue": "^2.6.11",
+    "vue-easytable": "^2.27.1",
     "vue-router": "^3.0.7",
     "vuex": "^3.4.0"
   },

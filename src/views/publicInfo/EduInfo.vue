@@ -20,7 +20,6 @@
 // window.echarts = require("utils/echarts-all-3.js");
 import EchartsLayer from "utils/EchartsLayer.js";
 // window.EchartsLayer = require("utils/EchartsLayer.js");
-// console.log(window.echarts, "_echarts");
 import {
   get_eduData,
   getPubCityData,
@@ -46,7 +45,6 @@ export default {
     setScatter() {
       get_eduData("/public_info/pub-edu/all").then((res) => {
         var res_data = res.data.data;
-        console.log(res_data, "res_data");
         for (let i = 0; i < res_data.length; i++) {
           var obj = {
             name: res_data[i].name,
@@ -68,7 +66,6 @@ export default {
           };
           edu_data.push(obj);
         }
-        console.log(edu_data, "edu_data");
         var option = {
           tooltip: {
             trigger: "item",
@@ -132,7 +129,6 @@ export default {
           ],
         };
         echartslayer = new EchartsLayer(window.MAP);
-        console.log(echartslayer, "echartslayer");
         echartslayer.chart.setOption(option);
          this.pie_chart();
          this.bar_chart();
@@ -214,14 +210,12 @@ export default {
       var bar_Chart = echarts.init(bar_Dom);
       getPubDistData("/public_info/pubinfo-dist/edu_info").then((res) => {
         var pubDist_data = res.data.data;
-        console.log(pubDist_data,'pubDist_data');
         let bar_datax = [];
         let bar_datay = [];
         for (let i = 0; i < pubDist_data.length; i++) {
           bar_datax.push(pubDist_data[i].sumEdu);
           bar_datay.push(pubDist_data[i].xzq);
         }
-        console.log(bar_datax,bar_datay,'bar_datax');
         var bar_option = {
           tooltip: {
             trigger: "item",

@@ -42,11 +42,11 @@ const routes = [
             meta: { title: "大学生人口画像", icon: "el-icon-position" },
             component:()=>import('@/views/population/GraduateMap.vue'),
           },
-          {
-            path:'/population/timeSharding',
-            meta: { title: "分时人口统计", icon: "el-icon-position" },
-            component:()=>import('@/views/population/TimeSharding.vue'),
-          },
+          // {
+          //   path:'/population/timeSharding',
+          //   meta: { title: "分时人口统计", icon: "el-icon-position" },
+          //   component:()=>import('@/views/population/TimeSharding.vue'),
+          // },
           {
             path:'/population/CountyInfo',
             meta: { title: "村界人口概览", icon: "el-icon-position" },
@@ -67,11 +67,11 @@ const routes = [
             meta: { title: "交通小区人口OD", icon: "el-icon-position" },
             component:()=>import('@/views/population/TransportationOD.vue'),
           },
-          {
-            path:'/population/census',
-            meta: { title: "人口普查", icon: "el-icon-position" },
-            component:()=>import('@/views/population/Census.vue'),
-          },
+          // {
+          //   path:'/population/census',
+          //   meta: { title: "人口普查", icon: "el-icon-position" },
+          //   component:()=>import('@/views/population/Census.vue'),
+          // },
           {
             path:'/population/changzhu_pop',
             meta: { title: "常住人口", icon: "el-icon-position" },
@@ -82,20 +82,30 @@ const routes = [
             meta: { title: "常住人口变化", icon: "el-icon-position" },
             component:()=>import('@/views/population/changzhuVary/ChangzhuVary.vue'),
           },
-          {
-            path:'/population/labor_pop',
-            meta: { title: "驻留劳动人口", icon: "el-icon-position" },
-            component:()=>import('@/views/population/laborPop/LaborPop.vue'),
-          },
-          {
-            path:'/population/labor_vary',
-            meta: { title: "驻留劳动人口变化", icon: "el-icon-position" },
-            component:()=>import('@/views/population/laborPopVary/LaborPopVary.vue'),
-          },
+          // {
+          //   path:'/population/labor_pop',
+          //   meta: { title: "驻留劳动人口", icon: "el-icon-position" },
+          //   component:()=>import('@/views/population/laborPop/LaborPop.vue'),
+          // },
+          // {
+          //   path:'/population/labor_vary',
+          //   meta: { title: "驻留劳动人口变化", icon: "el-icon-position" },
+          //   component:()=>import('@/views/population/laborPopVary/LaborPopVary.vue'),
+          // },
           {
             path:'/population/liushi_hp',
             meta: { title: "黄埔人口流失", icon: "el-icon-position" },
             component:()=>import('@/views/population/LiushiPopHP.vue'),
+          },
+          // {
+          //   path:'/population/shangquan',
+          //   meta: { title: "重点商圈客流", icon: "el-icon-position" },
+          //   component:()=>import('@/views/population/Shangquan.vue'),
+          // },
+          {
+            path:'/population/keliu',
+            meta: { title: "重点商圈客流", icon: "el-icon-position" },
+            component:()=>import('@/views/population/Keliu.vue'),
           },
         ]
       },
@@ -159,11 +169,6 @@ const routes = [
         component: () => import('@/views/industry/index.vue'),
         children:[
           {
-            path: '/industry/gyy_huaxiang',
-            meta: { title: "工业园画像", icon: "el-icon-position" },
-            component: () => import('@/views/industry/Gongyeyuan.vue'),
-          },
-          {
             path: '/industry/qiye',
             meta: { title: "企业概况", icon: "el-icon-position" },
             component: () => import('@/views/industry/Qiye.vue'),
@@ -179,9 +184,26 @@ const routes = [
           //   component: () => import('@/views/industry/Enterprise.vue'),
           // },
           {
+            path:'/industry/cyl_tupu',
+            name: "/industry/cyl_tupu",
+            meta: { title: "产业链图谱", icon: "el-icon-position" },
+            component:()=>import('@/views/industry/cyl_tupu/index.vue'),
+          },
+          {
+            path:'/industry/space_map',
+            name: "/industry/space_map",
+            meta: { title: "产业空间地图", icon: "el-icon-position" },
+            component:()=>import('@/views/industry/space_map/index.vue'),
+          },
+          {
             path:'/industry/carInduChain',
             meta: { title: "汽车产业链", icon: "el-icon-position" },
             component:()=>import('@/views/industry/CarInduChain.vue'),
+          },
+          {
+            path: '/industry/gyy_huaxiang',
+            meta: { title: "工业园画像", icon: "el-icon-position" },
+            component: () => import('@/views/industry/Gongyeyuan.vue'),
           },
           {
             path:'/industry/industry',
@@ -317,39 +339,39 @@ const routes = [
       //     },
       //   ]
       // },
-      {
-        path:'/fagai',
-        name:'发改项目',
-        meta: { title: "发改项目", icon: "el-icon-guide" },
-        component:()=>import('@/views/fagai/index.vue'),
-        children:[
-          {
-            path:'/fagai/changzhu',
-            meta: { title: "常住人口", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/changzhu/Permanent.vue'),
-          },
-          {
-            path:'/fagai/liuru',
-            meta: { title: "流入人口", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/liuru/Liudong.vue'),
-          },
-          {
-            path:'/fagai/liuchu',
-            meta: { title: "流出人口", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/liuchu/Liudong.vue'),
-          },
-          {
-            path:'/fagai/industry',
-            meta: { title: "工业园人流", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/gongyeyuan/Industry.vue'),
-          },
-          {
-            path:'/fagai/shangquan',
-            meta: { title: "商圈客流", icon: "el-icon-position" },
-            component:()=>import('@/views/fagai/business/Shangquan.vue'),
-          },
-        ]
-      },
+      // {
+      //   path:'/fagai',
+      //   name:'发改项目',
+      //   meta: { title: "发改项目", icon: "el-icon-guide" },
+      //   component:()=>import('@/views/fagai/index.vue'),
+      //   children:[
+      //     {
+      //       path:'/fagai/changzhu',
+      //       meta: { title: "常住人口", icon: "el-icon-position" },
+      //       component:()=>import('@/views/fagai/changzhu/Permanent.vue'),
+      //     },
+      //     {
+      //       path:'/fagai/liuru',
+      //       meta: { title: "流入人口", icon: "el-icon-position" },
+      //       component:()=>import('@/views/fagai/liuru/Liudong.vue'),
+      //     },
+      //     {
+      //       path:'/fagai/liuchu',
+      //       meta: { title: "流出人口", icon: "el-icon-position" },
+      //       component:()=>import('@/views/fagai/liuchu/Liudong.vue'),
+      //     },
+      //     {
+      //       path:'/fagai/industry',
+      //       meta: { title: "工业园人流", icon: "el-icon-position" },
+      //       component:()=>import('@/views/fagai/gongyeyuan/Industry.vue'),
+      //     },
+      //     {
+      //       path:'/fagai/shangquan',
+      //       meta: { title: "商圈客流", icon: "el-icon-position" },
+      //       component:()=>import('@/views/fagai/business/Shangquan.vue'),
+      //     },
+      //   ]
+      // },
     ]
   },
   {

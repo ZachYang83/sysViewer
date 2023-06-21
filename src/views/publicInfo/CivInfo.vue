@@ -38,7 +38,6 @@ export default {
     setScatter() {
       get_civData("/public_info/pub-civ/all").then((res) => {
         var res_data = res.data.data;
-        console.log(res_data, "res_data");
         for (let i = 0; i < res_data.length; i++) {
           var obj = {
             name: res_data[i].name,
@@ -60,7 +59,6 @@ export default {
           };
           civ_data.push(obj);
         }
-        console.log(civ_data, "civ_data");
         var option = {
           tooltip: {
             trigger: "item",
@@ -206,14 +204,12 @@ export default {
       var bar_Chart = echarts.init(bar_Dom);
       getPubDistData("/public_info/pubinfo-dist/civ_info").then((res) => {
         var pubDist_data = res.data.data;
-        console.log(pubDist_data,'pubDist_data');
         let bar_datax = [];
         let bar_datay = [];
         for (let i = 0; i < pubDist_data.length; i++) {
           bar_datax.push(pubDist_data[i].sumCiv);
           bar_datay.push(pubDist_data[i].xzq);
         }
-        console.log(bar_datax,bar_datay,'bar_datax');
         var bar_option = {
           tooltip: {
             trigger: "item",

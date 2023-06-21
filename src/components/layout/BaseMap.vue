@@ -25,9 +25,9 @@ export default {
 
       window.MAP = new mapboxgl.Map({
         container: "map",
-        // style: "mapbox://styles/mapbox/dark-v9",
-        glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+        // style: "mapbox://styles/mapbox/light-v10",
         // style:"mapbox://styles/mapbox/satellite-v9",
+        glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
         style: {
           version: 8,
           glyphs: "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",

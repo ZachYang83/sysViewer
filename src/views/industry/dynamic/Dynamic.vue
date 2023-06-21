@@ -40,7 +40,7 @@ import {
   add_tms2,
   addgeojson_S,
   addgeojson_L,
-} from "utils/loadLayer2.js";
+} from "utils/loadLayer.js";
 import { removeLayers } from "utils/removeLayers.js";
 import Popup from "@/components/Popup.vue";
 import Legend from "@/components/Popup.vue";
@@ -52,98 +52,93 @@ export default {
   data() {
     return {
       visible: false,
-      zhankai:true,
+      zhankai: true,
       propsData: [],
       showLegend: true,
       legendItems: [
-        { index: 1, text: "批发和零售业", style: "backgroundColor:#f78380" },
+        { index: 1, text: "采矿业", style: "backgroundColor:#dce775" },
         {
           index: 2,
-          text: "租赁和商务服务业",
-          style: "backgroundColor:#f6829e",
+          text: "电力、热力、燃气及水生产和供应业",
+          style: "backgroundColor:#ff80ab",
         },
+        { index: 3, text: "房地产业", style: "backgroundColor:#4fc3f7" },
+        { index: 4, text: "国际组织", style: "backgroundColor:#ba68c8" },
+        { index: 5, text: "建筑业", style: "backgroundColor:#ff9800" },
         {
-          index: 3,
-          text: "科学研究和技术服务",
-          style: "backgroundColor:#ff4000",
+          index: 6,
+          text: "交通运输、仓储和邮政业",
+          style: "backgroundColor:#69f0ae",
         },
+        { index: 7, text: "教育", style: "backgroundColor:#b388ff" },
+        { index: 8, text: "金融业", style: "backgroundColor:#1de9b6" },
         {
-          index: 4,
-          text: "文化、体育和娱乐业",
-          style: "backgroundColor:#ff809f",
+          index: 9,
+          text: "居民服务、修理和其他服务业",
+          style: "backgroundColor:#ffff00",
         },
-        { index: 5, text: "信息传输、软件", style: "backgroundColor:#809fff" },
-        { index: 6, text: "住宿和餐饮业", style: "backgroundColor:#f42646" },
-        {
-          index: 7,
-          text: "居民服务、修理和其他",
-          style: "backgroundColor:#dbdd74",
-        },
-        { index: 8, text: "建筑业", style: "backgroundColor:#ffbf00" },
-        { index: 9, text: "房地产业", style: "backgroundColor:#ffff6b" },
         {
           index: 10,
-          text: "交通运输、仓储和邮电",
-          style: "backgroundColor:#adadad",
+          text: "科学研究和技术服务业",
+          style: "backgroundColor:#ffff00",
         },
-        { index: 11, text: "制造业", style: "backgroundColor:#b58b5f" },
-        { index: 12, text: "教育", style: "backgroundColor:#ff80ff" },
-        { index: 13, text: "金融业", style: "backgroundColor:#ff0000" },
-        { index: 14, text: "卫生和社会工作", style: "backgroundColor:#f78380" },
+        {
+          index: 11,
+          text: "农、林、牧、渔业",
+          style: "backgroundColor:#ffd54f",
+        },
+        { index: 12, text: "批发和零售业", style: "backgroundColor:#aeea00" },
+        {
+          index: 13,
+          text: "水利、环境和公共设施管理业",
+          style: "backgroundColor:#64b5f6",
+        },
+        { index: 14, text: "卫生和社会工作", style: "backgroundColor:#ffb74d" },
         {
           index: 15,
-          text: "水利、环境和公共设施",
-          style: "backgroundColor:#00ffff",
+          text: "文化、体育和娱乐业",
+          style: "backgroundColor:#00e5ff",
         },
         {
           index: 16,
-          text: "农、林、牧、渔业",
-          style: "backgroundColor:#00ff80",
+          text: "信息传输、软件和信息技术服务业",
+          style: "backgroundColor:#ff4081",
         },
-        { index: 17, text: "其他", style: "backgroundColor:#d4e157" },
-        { index: 18, text: "采矿业", style: "backgroundColor:#4d3900" },
+        { index: 17, text: "制造业", style: "backgroundColor:#e040fb" },
+        { index: 18, text: "住宿和餐饮业", style: "backgroundColor:#00e5ff" },
         {
           index: 19,
-          text: "电力、热力、燃气",
-          style: "backgroundColor:#0099cc",
-        },
-        {
-          index: 19,
-          text: "电力、热力、燃气",
-          style: "backgroundColor:#0099cc",
+          text: "租赁和商务服务业",
+          style: "backgroundColor:#ff4081",
         },
       ],
       cdata: {
         category: [
-          "2000",
-          "2001",
-          "2002",
-          "2003",
-          "2004",
-          "2005",
-          "2006",
-          "2007",
-          "2008",
-          "2009",
-          "2011",
-          "2012",
-          "2013",
-          "2014",
-          "2015",
-          "2016",
-          "2017",
-          "2018",
-          "2019",
-          "2020",
-          "2021",
+          "2014及以前",
+          "2015.6",
+          "2015.12",
+          "2016.6",
+          "2016.12",
+          "2017.6",
+          "2017.12",
+          "2018.6",
+          "2018.12",
+          "2019.6",
+          "2019.12",
+          "2020.6",
+          "2020.12",
+          "2021.6",
+          "2021.12",
+          "2022.6",
+          "2022.8",
         ],
         barData: [
-          78, 80, 94, 178, 159, 145, 166, 162, 182, 238, 292, 352, 322, 388,
-          609, 608, 853, 1094, 1064, 832, 724, 3,
+          6357, 6978, 7703, 8489, 9476, 10708, 11992, 13878, 15086, 16628,
+          18643, 22564, 25192, 27633, 30227, 32261, 33009,
         ],
         rateData: [
-          0, 2, 14, 84, -19, -14, 21, -4, 20, 56, 54, 60, -30, 66, 221, -1,
-          245, 241, -30, -232, -108, -721,
+          0, 620, 725, 786, 987, 1231, 1285, 1885, 1208, 543, 2014, 3922, 2628,
+          2442, 2594, 2034, 748,
         ],
       },
     };
@@ -155,70 +150,69 @@ export default {
     Chart,
   },
   mounted() {
-    init_map(window.MAP, [113.297084, 23.140441], 14);
+    init_map(window.MAP, [113.351, 23.094], 13);
     this.initLayers();
     this.mouseEvent();
   },
   methods: {
     initLayers() {
-      removeLayers(window.MAP, ["hhg-hongxian"]);
-      add_wms(window.MAP, "hhg-hongxian");
+      removeLayers(window.MAP, ["pz_hongxian"]);
+      add_wms(window.MAP, "pz_hongxian");
       var circle = {
         "circle-radius": 5,
         "circle-stroke-width": 1,
         "circle-stroke-color": "#fff",
         "circle-color": [
           "match",
-          ["get", "行业"],
+          ["get", "SECTOR"],
           "采矿业",
-          "rgba(77,57,0,1)",
-          "电力、热力、燃气及",
-          "rgba(0,153,204,1)",
+          "#dce775",
+          "电力、热力、燃气及水生产和供应业",
+          "#ff80ab",
           "房地产业",
-          "rgba(255,255,107,1)",
-          "公共管理、社会保障",
-          "rgba(255,128,191,1)",
+          "#4fc3f7",
+          "国际组织",
+          "#ba68c8",
           "建筑业",
-          "rgba(255,191,0,1)",
-          "交通运输、仓储和邮",
-          "rgba(173,173,173,1)",
+          "#ff9800",
+          "交通运输、仓储和邮政业",
+          "#69f0ae",
           "教育",
-          "rgba(255,128,255,1)",
+          "#b388ff",
           "金融业",
-          "rgba(255,0,0,1)",
-          "居民服务、修理和其",
-          "rgba(219,221,116,1)",
-          "科学研究和技术服务",
-          "rgba(255,64,0,1)",
+          "#1de9b6",
+          "居民服务、修理和其他服务业",
+          "#ffff00",
+          "科学研究和技术服务业",
+          "#ffff00",
           "农、林、牧、渔业",
-          "rgba(0,255,128,1)",
+          "#ffd54f",
           "批发和零售业",
-          "rgba(247,131,128,1)",
-          "水利、环境和公共设",
-          "rgba(0,255,255,1)",
+          "#aeea00",
+          "水利、环境和公共设施管理业",
+          "#64b5f6",
           "卫生和社会工作",
-          "rgba(247,131,128,1)",
+          "#ffb74d",
           "文化、体育和娱乐业",
-          "rgba(255,128,159,1)",
-          "信息传输、软件和信",
-          "rgba(128,159,255,1)",
+          "#00e5ff",
+          "信息传输、软件和信息技术服务业",
+          "#ff4081",
           "制造业",
-          "rgba(181,139,95,1)",
+          "#e040fb",
           "住宿和餐饮业",
-          "rgba(244,38,70,1)",
+          "#00e5ff",
           "租赁和商务服务业",
-          "rgba(246,130,158,1)",
+          "#ff4081",
           "#d4e157",
         ],
       };
-      add_tms2(window.MAP, "hhg-qiye", "circle", circle);
-      
+      add_tms(window.MAP, "pz_qiye", "circle", circle);
 
       window.MAP.addLayer({
-        id: "hhg-qiye-hl",
+        id: "pz_qiye-hl",
         type: "circle",
-        source: "hhg-qiye",
-        "source-layer": "hhg-qiye",
+        source: "pz_qiye",
+        "source-layer": "pz_qiye",
         paint: {
           "circle-color": "#18ffff",
           "circle-radius": 6,
@@ -239,41 +233,41 @@ export default {
     getInfo(e) {
       let _this = this;
       var features = window.MAP.queryRenderedFeatures(e.point);
-      if (features[0].layer.id == "hhg-qiye") {
+      if (features[0].layer.id == "pz_qiye") {
         var props = features[0].properties;
-        window.MAP.setFilter("hhg-qiye-hl", [
+        window.MAP.setFilter("pz_qiye-hl", [
           "in",
-          "objectid",
-          features[0].properties.objectid,
+          "CODE",
+          features[0].properties.CODE,
         ]);
         _this.propsData = [
           {
             prop: "企业名称",
-            value: props["企业名"],
+            value: props["NAME"],
           },
           {
             prop: "地址",
-            value: props["s_add"],
+            value: props["ADDRESS"],
           },
           {
             prop: "所属行业",
-            value: props["行业"],
+            value: props["SECTOR"],
           },
           {
             prop: "注册时间",
-            value: props["成立日"],
+            value: props["DOE"],
           },
           {
             prop: "企业类型",
-            value: props["企业类"],
+            value: props["TYPE"],
           },
           {
             prop: "登记状态",
-            value: props["登记状"],
+            value: props["CODE"],
           },
           {
             prop: "经营范围",
-            value: props["经营范"],
+            value: props["SERVICE"],
           },
         ];
       }
@@ -325,7 +319,7 @@ export default {
   },
   destroyed() {
     let _this = this;
-    removeLayers(window.MAP, ["hhg-qiye-hl", "hhg-qiye","hhg-hongxian"]);
+    removeLayers(window.MAP, ["pz_qiye-hl", "pz_qiye", "pz_hongxian"]);
     window.MAP.off("click", _this.getInfo);
     window.MAP.off("mousemove", _this.cursorMove);
   },
@@ -353,8 +347,8 @@ export default {
   overflow: hidden;
   overflow-y: scroll;
   padding: 10px;
-  background-color: rgba(38,40,41,0.9);
-  color:#fff;
+  background-color: rgba(38, 40, 41, 0.9);
+  color: #fff;
 }
 ::-webkit-scrollbar {
   display: none;

@@ -7,7 +7,6 @@
 // window.echarts = echarts;
 import EchartsLayer from "utils/EchartsLayer.js";
 // window.EchartsLayer = require("utils/EchartsLayer.js");
-// console.log(window.echarts, "_echarts");
 import { get_markData } from "api/publicInfo/marketInfo.js";
 
 let mark_data = [];
@@ -25,7 +24,6 @@ export default {
     setScatter() {
       get_markData("/public_info/pub-market/all").then((res) => {
         var res_data = res.data.data;
-        console.log(res_data, "res_data");
         for (let i = 0; i < res_data.length; i++) {
           var obj = {
             name: res_data[i].name,
@@ -48,7 +46,6 @@ export default {
           };
           mark_data.push(obj);
         }
-        console.log(mark_data, "mark_data");
         var option = {
           tooltip: {
             trigger: "item",
@@ -114,8 +111,6 @@ export default {
           ],
         };
         echartslayer = new EchartsLayer(window.MAP);
-        console.log(echartslayer, "echartslayer");
-        echartslayer.chart.setOption(option);
       });
     },
   },
