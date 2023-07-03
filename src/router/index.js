@@ -168,15 +168,30 @@ const routes = [
         meta: { title: "产业信息", icon: "wlsys-qiyechaxun" },
         component: () => import('@/views/industry/index.vue'),
         children:[
-          {
-            path: '/industry/qiye',
-            meta: { title: "企业概况", icon: "el-icon-position" },
-            component: () => import('@/views/industry/Qiye.vue'),
-          },
+          // {
+          //   path: '/industry/qiye',
+          //   meta: { title: "企业概况", icon: "el-icon-position" },
+          //   component: () => import('@/views/industry/Qiye.vue'),
+          // },
           {
             path: '/industry/dynamic',
             meta: { title: "企业动态", icon: "el-icon-position" },
             component: () => import('@/views/industry/dynamic/Dynamic.vue'),
+          },
+          {
+            path: '/industry/biomedicine',
+            meta: { title: "生物医药企业", icon: "el-icon-position" },
+            component: () => import('@/views/industry/Biomedicine.vue'),
+          },
+          {
+            path:'/industry/industry',
+            meta: { title: "产业地块", icon: "el-icon-position" },
+            component:()=>import('@/views/industry/Industry.vue'),
+          },
+          {
+            path: '/industry/gyy_huaxiang',
+            meta: { title: "工业园画像", icon: "el-icon-position" },
+            component: () => import('@/views/industry/Gongyeyuan.vue'),
           },
           // {
           //   path: '/industry/enterprise',
@@ -199,16 +214,6 @@ const routes = [
             path:'/industry/carInduChain',
             meta: { title: "汽车产业链", icon: "el-icon-position" },
             component:()=>import('@/views/industry/CarInduChain.vue'),
-          },
-          {
-            path: '/industry/gyy_huaxiang',
-            meta: { title: "工业园画像", icon: "el-icon-position" },
-            component: () => import('@/views/industry/Gongyeyuan.vue'),
-          },
-          {
-            path:'/industry/industry',
-            meta: { title: "产业地块", icon: "el-icon-position" },
-            component:()=>import('@/views/industry/Industry.vue'),
           },
         ]
       },

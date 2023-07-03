@@ -3,7 +3,7 @@
     <div class="infoGroup" v-show="showInfoPan">
       <div
         class="infoItem"
-        style="marginright: 20px; backgroundColor: rgba(224, 90, 57, 0.5)"
+        style="marginright: 20px; backgroundcolor: rgba(224, 90, 57, 0.5)"
       >
         <div class="icon">
           <img :src="infoImgs[0]" />
@@ -15,7 +15,7 @@
       </div>
       <div
         class="infoItem"
-        style="marginright: 20px; backgroundColor: rgba(241, 151, 17, 0.5)"
+        style="marginright: 20px; backgroundcolor: rgba(241, 151, 17, 0.5)"
       >
         <div class="icon">
           <img :src="infoImgs[1]" />
@@ -25,7 +25,7 @@
           <div class="value">{{ juzhu }}</div>
         </div>
       </div>
-      <div class="infoItem" style="backgroundColor: rgba(62, 140, 110, 0.5)">
+      <div class="infoItem" style="backgroundcolor: rgba(62, 140, 110, 0.5)">
         <div class="icon">
           <img :src="infoImgs[2]" />
         </div>
@@ -179,6 +179,28 @@ export default {
         },
         filter: ["in", "id", ""],
       });
+
+      var layoutName = {
+        "icon-image": "",
+        "text-field": "{开发区}", //此属性为需要显示的字段
+        "text-size": 12,
+        "text-anchor": "top",
+      };
+      window.MAP.addLayer({
+        id: "fg_gongyeyuan_sym",
+        source: "fg_gongyeyuan",
+        "source-layer": "fg_gongyeyuan",
+        type: "symbol",
+        layout: layoutName,
+        paint: {
+          "text-color": "rgba(247,255,62,1)",
+        },
+      });
+      var line = {
+        "line-color": "#9e9e9e",
+        "line-width": 2,
+      };
+      add_tms(window.MAP, "gdxzbj", "line", line);
     },
     mouseEvent() {
       let _this = this;
@@ -713,7 +735,13 @@ export default {
 
   destroyed() {
     let _this = this;
-    removeLayers(window.MAP, ["fg_gongyeyuan-hl","fg_gongyeyuan-line","fg_gongyeyuan"]);
+    removeLayers(window.MAP, [
+      "gdxzbj",
+      "fg_gongyeyuan_sym",
+      "fg_gongyeyuan-hl",
+      "fg_gongyeyuan-line",
+      "fg_gongyeyuan",
+    ]);
     window.MAP.off("click", _this.getInfo);
     window.MAP.off("mousemove", _this.cursorMove);
   },

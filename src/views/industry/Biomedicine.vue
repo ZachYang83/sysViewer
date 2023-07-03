@@ -45,32 +45,33 @@ export default {
   methods: {
     initLayers() {
       var circle = {
-       "fill-outline-color": "#ea80fc",
-        "fill-color": [
-          "case",
-          ["boolean", ["feature-state", "hover"], false],
-          "#ea80fc",
-          "#fff",
-        ],
-        "fill-opacity": [
-          "case",
-          ["boolean", ["feature-state", "hover"], false],
-          1,
-          0.8,
+        "circle-radius": 5,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#fff",
+        "circle-color": [
+          "match",
+          ["get", "产业链"],
+          "上游",
+          "#dce775",
+          "中游",
+          "#ff80ab",
+          "下游",
+          "#4fc3f7",
+          "#d4e157",
         ],
       };
-      add_tms(window.MAP, "wlsys-industry", "fill", circle);
+      add_tms(window.MAP, "biomedical_comp", "circle", circle);
 
       var layoutName = {
         "icon-image": "",
-        "text-field": "{地块名称}", //此属性为需要显示的字段
+        "text-field": "{公司名}", //此属性为需要显示的字段
         "text-size": 12,
         "text-anchor": "top",
       };
       window.MAP.addLayer({
-        id: "wlsys-industry_sym",
-        source: "wlsys-industry",
-        "source-layer": "wlsys-industry",
+        id: "biomedical_comp_sym",
+        source: "biomedical_comp",
+        "source-layer": "biomedical_comp",
         type: "symbol",
         layout: layoutName,
         paint: {
@@ -79,15 +80,17 @@ export default {
       });
 
       window.MAP.addLayer({
-        id: "wlsys-industry-hl",
-        type: "line",
-        source: "wlsys-industry",
-        "source-layer": "wlsys-industry",
+        id: "biomedical_comp-hl",
+        type: "circle",
+        source: "biomedical_comp",
+        "source-layer": "biomedical_comp",
         paint: {
-          "line-color": "#18ffff",
-          "line-width": 3,
+          "circle-color": "#18ffff",
+          "circle-radius": 6,
+          "circle-stroke-width": 2,
+          "circle-stroke-color": "#fff",
         },
-        filter: ["in", "objectid", ""],
+        filter: ["in", "OBJECTID", ""],
       });
 
       var line = {
@@ -106,55 +109,67 @@ export default {
     },
     getInfo(e) {
       let _this = this;
-      console.log(event, "ddsfsdf");
       var features = window.MAP.queryRenderedFeatures(e.point);
-      if (features[0].layer.id == "wlsys-industry") {
+      console.log(features, "features");
+      if (features[0].layer.id == "biomedical_comp") {
         var props = features[0].properties;
         console.log(props, "props");
-         window.MAP.setFilter("wlsys-industry-hl",[
+        window.MAP.setFilter("biomedical_comp-hl", [
           "in",
-          "objectid",
-          features[0].properties.objectid
-        ])
+          "OBJECTID",
+          features[0].properties.OBJECTID,
+        ]);
         _this.propsData = [
           {
-            prop: "地块名称",
-            value: props["地块名称"],
+            prop: "公司名称",
+            value: props["公司名"],
           },
           {
-            prop: "地块位置",
-            value: props["地块位置"],
+            prop: "公司类型",
+            value: props["公司类"],
           },
           {
-            prop: "地块面积",
-            value: props["地块面积（"],
+            prop: "经营状况",
+            value: props["经营状"],
           },
           {
-            prop: "所属平台",
-            value: props["所属平台（"],
+            prop: "所属行业",
+            value: props["所属行"],
           },
           {
-            prop: "产业定位",
-            value: props["产业定位"],
+            prop: "领域",
+            value: props["领域"],
           },
           {
-            prop: "控规情况",
-            value: props["控规情况"],
+            prop: "注册资本",
+            value: props["注册资"],
           },
           {
-            prop: "优先发展产业",
-            value: props["优先发展产"],
+            prop: "实缴资本",
+            value: props["实缴资"],
           },
           {
-            prop: "总体分析",
-            value: props["总体分析"],
+            prop: "参保人数",
+            value: props["参保人"],
+          },
+          {
+            prop: "所属园区",
+            value: props["所属园"],
+          },
+          {
+            prop: "地址",
+            value: props["地址"],
+          },
+          {
+            prop: "经营范围",
+            value: props["经营范"],
           },
         ];
       }
       _this.visible = true;
       var infoBox = document.getElementById("infoBox");
-      infoBox.style.top = e.originalEvent.clientY - 120 + "px";
-      infoBox.style.left = e.originalEvent.clientX + 40 + "px";
+      infoBox.style.top = e.originalEvent.clientY + 10 + "px";
+      infoBox.style.left = e.originalEvent.clientX + 20 + "px";
     },
     onCancel() {
       this.visible = false;
@@ -162,7 +177,12 @@ export default {
   },
   destroyed() {
     let _this = this;
-    removeLayers(window.MAP, ["gz_line","wlsys-industry_sym","wlsys-industry-hl","wlsys-industry"]);
+    removeLayers(window.MAP, [
+      "gz_line",
+      "biomedical_comp_sym",
+      "biomedical_comp-hl",
+      "biomedical_comp",
+    ]);
     window.MAP.off("click", _this.getInfo);
     window.MAP.off("mousemove", _this.cursorMove);
   },
