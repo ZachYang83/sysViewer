@@ -168,16 +168,16 @@ export default {
         "line-width": 1.1,
       };
       add_tms(window.MAP, "gd_line", "line", paint2);
-      // var paint3 = {
-      //   "line-color": "#ff6e40",
-      //   "line-width": 2,
-      // };
-      // add_tms(window.MAP, "BigBay3", "line", paint3);
+      var paint3 = {
+        "line-color": "#ff6e40",
+        "line-width": 2,
+      };
+      add_tms(window.MAP, "BigBay3", "line", paint3);
       var dadushi = {
         "line-color": "#df20df",
         "line-width": 3,
       };
-      add_tms(window.MAP, "gzdadushi", "line", dadushi);
+      // add_tms(window.MAP, "gzdadushi", "line", dadushi);
     },
     hoverLayer() {
       let _this = this;
@@ -637,6 +637,7 @@ export default {
       "gd_line",
       "od_layer",
       "point_layer",
+      "BigBay3"
     ]);
     let _this = this;
     window.MAP.off("mousemove", "guangdong2",_this.onmousemove);

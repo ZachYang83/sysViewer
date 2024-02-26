@@ -14,11 +14,18 @@
         </el-table-column>
       </el-table>
     </Popup>
+     <Legend
+      :title="title"
+      :items="items"
+      style="bottom: 20px; left: 10px; width: 200px; height: auto"
+    >
+    </Legend>
   </div>
 </template>
 
 <script>
 import { init_map } from "utils/initMap.js";
+import Legend from "components/common/Legend.vue";
 import {
   add_tms,
   add_wms,
@@ -32,10 +39,29 @@ export default {
     return {
       visible: false,
       propsData: [],
+      title: "产业链",
+      items: [
+        {
+          index: 1,
+          text: "上游",
+          style: "backgroundColor:#dce775",
+        },
+        {
+          index: 2,
+          text: "中游",
+          style: "backgroundColor:#ff80ab",
+        },
+        {
+          index: 3,
+          text: "下游",
+          style: "backgroundColor:#4fc3f7",
+        },
+      ],
     };
   },
   components: {
     Popup,
+    Legend,
   },
   mounted() {
     init_map(window.MAP, [113.697084, 23.240441], 8.5);

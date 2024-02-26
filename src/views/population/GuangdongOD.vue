@@ -172,7 +172,7 @@ export default {
         "line-color": "#df20df",
         "line-width": 3,
       };
-      add_tms(window.MAP, "gzdadushi", "line", dadushi);
+      // add_tms(window.MAP, "gzdadushi", "line", dadushi);
     },
     hoverLayer() {
       let _this = this;

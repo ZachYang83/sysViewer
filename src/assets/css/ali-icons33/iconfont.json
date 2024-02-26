@@ -1,0 +1,93 @@
+{
+  "id": "3622401",
+  "name": "城市感知与应用一体化平台",
+  "font_family": "iconfont",
+  "css_prefix_text": "wlsys-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "2578222",
+      "name": "产业园区",
+      "font_class": "chanyeyuanqu",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "11463947",
+      "name": "企业查询",
+      "font_class": "qiyechaxun",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "3920371",
+      "name": "老人",
+      "font_class": "old",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "31461923",
+      "name": "老人",
+      "font_class": "laoren",
+      "unicode": "100e8",
+      "unicode_decimal": 65768
+    },
+    {
+      "icon_id": "20997746",
+      "name": "老人看护提醒",
+      "font_class": "menu_lrtx",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "17842893",
+      "name": "无障碍通道",
+      "font_class": "wuzhangaitongdao",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "30329935",
+      "name": "icon-房屋",
+      "font_class": "icon-fangwu",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "883877",
+      "name": "交通",
+      "font_class": "jiaotong",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "5474815",
+      "name": "人口",
+      "font_class": "renkou",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "10936615",
+      "name": "nav_基建档案",
+      "font_class": "nav_jijiandangan",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "20997750",
+      "name": "人口信息",
+      "font_class": "menu_xqrkxx",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "31461858",
+      "name": "土地",
+      "font_class": "tudi",
+      "unicode": "100e7",
+      "unicode_decimal": 65767
+    }
+  ]
+}

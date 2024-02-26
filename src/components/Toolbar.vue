@@ -1,13 +1,13 @@
 <template>
   <div>
     <div class="tool-bar">
-      <el-popover placement="bottom" width="300" trigger="click">
+      <!-- <el-popover placement="bottom" width="300" trigger="click"> -->
         <!-- <Tree></Tree> -->
-        <h2 style="textalign: center">图层</h2>
+        <!-- <h2 style="textalign: center">图层</h2>
         <div slot="reference" class="icon-box">
           <i class="icon-layer"></i> 图层
         </div>
-      </el-popover>
+      </el-popover> -->
       <el-dropdown trigger="hover">
         <div class="icon-box el-dropdown-link">
           <i class="icon-baselayer"></i> 底图

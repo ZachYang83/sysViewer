@@ -87,7 +87,7 @@ export default {
         "line-color": "#df20df",
         "line-width": 3,
       };
-      add_tms(window.MAP, "gzdadushi", "line", paint);
+      // add_tms(window.MAP, "gzdadushi", "line", paint);
     },
   },
 

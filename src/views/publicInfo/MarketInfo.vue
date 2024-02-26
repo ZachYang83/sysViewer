@@ -111,6 +111,7 @@ export default {
           ],
         };
         echartslayer = new EchartsLayer(window.MAP);
+        echartslayer.chart.setOption(option);
       });
     },
   },

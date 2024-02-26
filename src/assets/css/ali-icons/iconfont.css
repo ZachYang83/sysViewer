@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 3622401 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1662629675141') format('woff2'),
-       url('iconfont.woff?t=1662629675141') format('woff'),
-       url('iconfont.ttf?t=1662629675141') format('truetype');
+       url('iconfont.woff2?t=1694145235818') format('woff2'),
+       url('iconfont.woff?t=1694145235818') format('woff'),
+       url('iconfont.ttf?t=1694145235818') format('truetype');
 }
 
 .iconfont,[class^="wlsys-"],[class*=" wlsys-"] {
@@ -13,6 +13,26 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.wlsys-nenghao:before {
+  content: "\e6e5";
+}
+
+.wlsys-walk:before {
+  content: "\eeef";
+}
+
+.wlsys-jianshe:before {
+  content: "\e607";
+}
+
+.wlsys-daolujiaotong:before {
+  content: "\e606";
+}
+
+.wlsys-fangwu2:before {
+  content: "\e614";
 }
 
 .wlsys-chanyeyuanqu:before {
@@ -37,10 +57,6 @@
 
 .wlsys-wuzhangaitongdao:before {
   content: "\e613";
-}
-
-.wlsys-icon-fangwu:before {
-  content: "\e603";
 }
 
 .wlsys-jiaotong:before {

@@ -6,6 +6,41 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "8688318",
+      "name": "能源能耗管理",
+      "font_class": "nenghao",
+      "unicode": "e6e5",
+      "unicode_decimal": 59109
+    },
+    {
+      "icon_id": "6809424",
+      "name": "433",
+      "font_class": "walk",
+      "unicode": "eeef",
+      "unicode_decimal": 61167
+    },
+    {
+      "icon_id": "14152437",
+      "name": "建设",
+      "font_class": "jianshe",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "2127638",
+      "name": "道路交通",
+      "font_class": "daolujiaotong",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "15383972",
+      "name": "房屋2",
+      "font_class": "fangwu2",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
       "icon_id": "2578222",
       "name": "产业园区",
       "font_class": "chanyeyuanqu",
@@ -46,13 +81,6 @@
       "font_class": "wuzhangaitongdao",
       "unicode": "e613",
       "unicode_decimal": 58899
-    },
-    {
-      "icon_id": "30329935",
-      "name": "icon-房屋",
-      "font_class": "icon-fangwu",
-      "unicode": "e603",
-      "unicode_decimal": 58883
     },
     {
       "icon_id": "883877",

@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       options: [
-        { label: "广州市", value: "guangzhou" },
+        { label: "广州市", value: "guangzhou2" },
         { label: "深圳市", value: "shenzhen" },
         { label: "珠海市", value: "zhuhai" },
         { label: "东莞市", value: "dongguan" },

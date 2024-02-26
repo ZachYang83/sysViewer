@@ -3,7 +3,7 @@
     <div class="month_select">
       <span style="display: inline-block; width: 50px">对比：</span>
       <el-select
-        placeholder="2020年5月较2022年5月"
+        placeholder="2022年5月对比2021年5月"
         v-model="month_value"
         @change="changeMonth"
       >
@@ -41,43 +41,43 @@ export default {
       monthOptions: [
         {
           value: "2020_2022",
-          label: "2020年5月较2022年5月",
+          label: "2022年5月对比2020年5月",
         },
         {
           value: "2021_2022",
-          label: "2021年5月较2022年5月",
+          label: "2022年5月对比2021年5月",
         },
       ],
       items: [
         {
           index: 1,
           text: "-2万以下",
-          style: "backgroundColor:rgba(29,78,155,0.8)",
+          style: "backgroundColor:rgba(49,54,149,80)",
         },
         {
           index: 2,
           text: "-2万 - -1万",
-          style: "backgroundColor:rgba(82,136,198,0.8)",
+          style: "backgroundColor:rgba(116,173,209,80)",
         },
         {
           index: 3,
           text: "-1万 - 0",
-          style: "backgroundColor:rgba(220,240,229,0.8)",
+          style: "backgroundColor:rgba(224,243,248,80)",
         },
         {
           index: 4,
           text: "0 - 1万",
-          style: "backgroundColor:rgba(251,194,65,0.8)",
+          style: "backgroundColor:rgba(254,224,144,80)",
         },
         {
           index: 5,
           text: "1万 - 5万",
-          style: "backgroundColor:rgba(230,152,0,0.8)",
+          style: "backgroundColor:rgba(244,109,67,80)",
         },
         {
           index: 6,
           text: "5万以上",
-          style: "backgroundColor:rgba(214,47,39,0.8)",
+          style: "backgroundColor:rgba(165,0,38,80)",
         },
       ],
       cdata: {
@@ -96,27 +96,14 @@ export default {
           "海珠区瑞宝街道",
           "白云区白云湖街道",
           "黄埔区大沙街道",
-          "海珠区素社街道"
+          "海珠区素社街道",
         ],
         barData: [
-          -4.28,
-          -3.83,
-          -3.00,
-          -2.95,
-          -2.58,
-          -2.46,
-          -2.14,
-          -2.03,
-          -1.72,
-          -1.69,
-          -1.62,
-          -1.61,
-          -1.55,
-          -1.34,
-          -1.33,
+          -4.28, -3.83, -3.0, -2.95, -2.58, -2.46, -2.14, -2.03, -1.72, -1.69,
+          -1.62, -1.61, -1.55, -1.34, -1.33,
         ],
       },
-      zhankai:true,
+      zhankai: true,
     };
   },
   components: {
@@ -153,17 +140,17 @@ export default {
           "fill-outline-color": "#455a64",
           "fill-color": [
             "case",
-            ["<", ["get", "20to22"], -2],
-            "rgba(29,78,155,0.8)",
-            ["<", ["get", "20to22"], -1],
-            "rgba(82,136,198,0.8)",
-            ["<", ["get", "20to22"], 0],
-            "rgba(220,240,229,0.8)",
-            ["<", ["get", "20to22"], 1],
-            "rgba(251,194,65,0.8)",
-            ["<", ["get", "20to22"], 5],
-            "rgba(132,196,214,0.8)",
-            "rgba(214,47,39,0.8)",
+            ["<", ["get", "21to22"], -2],
+            "rgba(49,54,149,80)",
+            ["<", ["get", "21to22"], -1],
+            "rgba(116,173,209,80)",
+            ["<", ["get", "21to22"], 0],
+            "rgba(224,243,248,80)",
+            ["<", ["get", "21to22"], 1],
+            "rgba(254,224,144,80)",
+            ["<", ["get", "21to22"], 5],
+            "rgba(244,109,67,80)",
+            "rgba(165,0,38,80)",
           ],
         },
       });
@@ -174,7 +161,7 @@ export default {
         type: "symbol",
         layout: {
           "icon-image": "",
-          "text-field": "{jiezhen}\n{20to22}", //此属性为需要显示的字段
+          "text-field": "{jiezhen}\n{21to22}", //此属性为需要显示的字段
           "text-size": 12,
           "text-anchor": "top",
         },
@@ -200,16 +187,16 @@ export default {
                     "fill-color": [
                       "case",
                       ["<", ["get", "20to22"], -2],
-                      "rgba(29,78,155,0.8)",
+                      "rgba(49,54,149,80)",
                       ["<", ["get", "20to22"], -1],
-                      "rgba(82,136,198,0.8)",
+                      "rgba(116,173,209,80)",
                       ["<", ["get", "20to22"], 0],
-                      "rgba(220,240,229,0.8)",
+                      "rgba(224,243,248,80)",
                       ["<", ["get", "20to22"], 1],
-                      "rgba(251,194,65,0.8)",
+                      "rgba(254,224,144,80)",
                       ["<", ["get", "20to22"], 5],
-                      "rgba(132,196,214,0.8)",
-                      "rgba(214,47,39,0.8)",
+                      "rgba(244,109,67,80)",
+                      "rgba(165,0,38,80)",
                     ],
                   },
                 });
@@ -239,16 +226,16 @@ export default {
                     "fill-color": [
                       "case",
                       ["<", ["get", "21to22"], -2],
-                      "rgba(29,78,155,0.8)",
+                      "rgba(49,54,149,80)",
                       ["<", ["get", "21to22"], -1],
-                      "rgba(82,136,198,0.8)",
+                      "rgba(116,173,209,80)",
                       ["<", ["get", "21to22"], 0],
-                      "rgba(220,240,229,0.8)",
+                      "rgba(224,243,248,80)",
                       ["<", ["get", "21to22"], 1],
-                      "rgba(251,194,65,0.8)",
+                      "rgba(254,224,144,80)",
                       ["<", ["get", "21to22"], 5],
-                      "rgba(132,196,214,0.8)",
-                      "rgba(214,47,39,0.8)",
+                      "rgba(244,109,67,80)",
+                      "rgba(165,0,38,80)",
                     ],
                   },
                 });
@@ -270,41 +257,35 @@ export default {
         }
       });
     },
-    showTable(){
-      var oDiv = document.getElementById('resident_liushi');
-      var mapdiv = document.getElementById('map');
-      console.log(mapdiv.style.width,'R');
-      console.log(oDiv.style.width,'L');
+    showTable() {
+      var oDiv = document.getElementById("resident_liushi");
+      var mapdiv = document.getElementById("map");
+      console.log(mapdiv.style.width, "R");
+      console.log(oDiv.style.width, "L");
       var Taget;
-      if(this.zhankai){
+      if (this.zhankai) {
         Taget = 1445;
-      }else{
+      } else {
         Taget = 1745;
       }
       console.log(oDiv.style.right);
       clearInterval(timer);
-      timer=setInterval(function(){
-            var speed=0;  //弹框的移动速度
-            if(oDiv.offsetLeft>Taget)
-            {
-               speed=-20;
-            }
-            else
-            {
-               speed=20;
-            }
-              if(oDiv.offsetLeft==Taget)
-             {
-                 clearInterval(timer);
-             }
-             else
-             {
-               console.log(oDiv.offsetLeft);
-                oDiv.style.left=oDiv.offsetLeft+speed+'px';
-             }
-          },30);
+      timer = setInterval(function () {
+        var speed = 0; //弹框的移动速度
+        if (oDiv.offsetLeft > Taget) {
+          speed = -20;
+        } else {
+          speed = 20;
+        }
+        if (oDiv.offsetLeft == Taget) {
+          clearInterval(timer);
+        } else {
+          console.log(oDiv.offsetLeft);
+          oDiv.style.left = oDiv.offsetLeft + speed + "px";
+        }
+      }, 30);
       this.zhankai = !this.zhankai;
-    }
+    },
   },
 
   destroyed() {
@@ -365,32 +346,32 @@ export default {
 }
 
 #resident_liushi {
-    position: absolute;
-    top: 40px;
-    right: -300px;
-    // right:-300px;
-    height: 70%;
-    width: 300px;
-    z-index: 9999;
-    background-color: rgba(44, 47, 48, 0.7);
+  position: absolute;
+  top: 40px;
+  right: -300px;
+  // right:-300px;
+  height: 70%;
+  width: 300px;
+  z-index: 9999;
+  background-color: rgba(44, 47, 48, 0.7);
 
-    span{
-      display: flex;
-      width:20px;
-      height:100px;
-      position:absolute;
-      right:300px; 
-      left:-20px;
-      top:0px;
-      line-height:20px;
-      background-color: aquamarine;
-      border-radius:10px 0 0 10px;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      cursor: pointer;
-    }
+  span {
+    display: flex;
+    width: 20px;
+    height: 100px;
+    position: absolute;
+    right: 300px;
+    left: -20px;
+    top: 0px;
+    line-height: 20px;
+    background-color: aquamarine;
+    border-radius: 10px 0 0 10px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
   }
+}
 </style>
 
 

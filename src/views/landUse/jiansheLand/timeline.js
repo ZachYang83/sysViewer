@@ -37,7 +37,7 @@ let _tlJson = {
         height: "80%",
         loop: false,
         autoPlay: false,
-        playInterval: 2000,
+        playInterval: 1000,
         realtime : true,
     },
     baseOption: {

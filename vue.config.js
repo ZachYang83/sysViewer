@@ -21,7 +21,7 @@ module.exports = {
     hotOnly: false,
     proxy: {
       '/api': {
-        target: 'http://8.134.70.156:8090',
+        target: 'http://localhost:8090',
         ws: true, // 是否启用websockets
         changeOrigin: true,  // 代理时是否更改host
         pathRewrite: {
@@ -29,7 +29,7 @@ module.exports = {
         }
       },
       '/pop_perceive': {
-        target: 'http://8.134.70.156:8090',
+        target: 'http://localhost:8090',
         ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -37,7 +37,7 @@ module.exports = {
         },
       },
       '/publicInfo': {
-        target: 'http://8.134.70.156:8090',
+        target: 'http://localhost:8090',
         ws: true,
         changOrigin: true,
         pathRewrite: {
@@ -45,7 +45,7 @@ module.exports = {
         },
       },
       '/industry': {
-        target: 'http://8.134.70.156:8090',
+        target: 'http://localhost:8090',
         ws: true,
         changOrigin: true,
         pathRewrite: {

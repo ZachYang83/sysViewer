@@ -1,5 +1,5 @@
 <template>
-<div>
+  <div>
     <Legend
       v-show="showLegend"
       :title="title"
@@ -7,7 +7,7 @@
       style="bottom: 20px; left: 10px; width: 200px; height: auto"
     >
     </Legend>
-</div>
+  </div>
 </template>
 
 <script>
@@ -16,7 +16,7 @@ import { get_passengerData } from "api/population/passenger.js";
 import Legend from "components/common/Legend.vue";
 import { add_tms, addgeojson_S, addgeojson_L } from "utils/loadLayer.js";
 import { removeLayers, removeLayers2 } from "utils/removeLayers.js";
-import { yiji,erji,sanji,siji } from "./gzhyod.js";
+import { yiji, erji, sanji, siji } from "./gzhyod.js";
 let echartslayer = null;
 
 export default {
@@ -57,73 +57,72 @@ export default {
     // this.setTrack();
     this.initLayers();
     this.setCompany();
-    
   },
   methods: {
     init() {
-      window.MAP.setCenter([113.216937,24.494172]);
+      window.MAP.setCenter([113.216937, 24.494172]);
       window.MAP.setZoom(6);
     },
     initLayers() {
-       var gdxzbj = {
+      var gdxzbj = {
         "line-color": "#bdbdbd",
         "line-width": 1,
       };
       add_tms(window.MAP, "gdxzbj", "line", gdxzbj);
-       var paint3 = {
+      var paint3 = {
         "line-color": "#df20df",
         "line-width": 3.5,
       };
-      add_tms(window.MAP, "gzdadushi", "line", paint3);
+      // add_tms(window.MAP, "gzdadushi", "line", paint3);
     },
     setCompany() {
       var yiji_data = [];
       var points = [];
-      points.push([113.538002,23.3369007])
+      points.push([113.538002, 23.3369007]);
       for (let i = 0; i < yiji.length; i++) {
-        var item = yiji[i]
-        var point2 =  [Number(item[0]),Number(item[1])];
+        var item = yiji[i];
+        var point2 = [Number(item[0]), Number(item[1])];
         var od = [
-          { coord: [113.538002,23.3369007] },
+          { coord: [113.538002, 23.3369007] },
           { coord: [item[0], item[1]] },
         ];
         yiji_data.push(od);
         points.push(point2);
       }
-       var erji_data = [];
+      var erji_data = [];
       for (let i = 0; i < erji.length; i++) {
-        var item = erji[i]
-        var point2 =  [Number(item[0]),Number(item[1])];
+        var item = erji[i];
+        var point2 = [Number(item[0]), Number(item[1])];
         var od = [
-          { coord: [113.538002,23.3369007] },
+          { coord: [113.538002, 23.3369007] },
           { coord: [item[0], item[1]] },
         ];
         erji_data.push(od);
         points.push(point2);
       }
-       var sanji_data = [];
+      var sanji_data = [];
       for (let i = 0; i < sanji.length; i++) {
-        var item = sanji[i]
-        var point2 =  [Number(item[0]),Number(item[1])];
+        var item = sanji[i];
+        var point2 = [Number(item[0]), Number(item[1])];
         var od = [
-          { coord: [113.538002,23.3369007] },
+          { coord: [113.538002, 23.3369007] },
           { coord: [item[0], item[1]] },
         ];
         sanji_data.push(od);
         points.push(point2);
       }
-       var siji_data = [];
+      var siji_data = [];
       for (let i = 0; i < siji.length; i++) {
-        var item = siji[i]
-        var point2 =  [Number(item[0]),Number(item[1])];
+        var item = siji[i];
+        var point2 = [Number(item[0]), Number(item[1])];
         var od = [
-          { coord: [113.538002,23.3369007] },
+          { coord: [113.538002, 23.3369007] },
           { coord: [item[0], item[1]] },
         ];
         siji_data.push(od);
         points.push(point2);
       }
-    console.log(yiji_data,erji_data,sanji_data,siji_data,'fdasfadsf');
+      console.log(points, "fdasfadsf");
       var option = {
         GLMap: {
           roam: false,
@@ -131,50 +130,51 @@ export default {
         coordinateSystem: "GLMap",
         series: [
           {
-            type: "scatter",
+            type: "effectScatter",
             coordinateSystem: "GLMap",
             data: points,
             symbolSize: 4,
             large: true,
-            label: {
-              normal: {
-                show: false,
-              },
-              emphasis: {
-                show: false,
-              },
+            // itemStyle: {
+            //   normal: {
+            //     color: "#ffff00",
+            //   },
+            //   emphasis: {
+            //     borderColor: "#fff",
+            //     borderWidth: 1,
+            //   },
+            // },
+            rippleEffect: {
+              brushType: "fill",
             },
             itemStyle: {
               normal: {
-                color: "#ffff00",
-              },
-              emphasis: {
-                borderColor: "#fff",
-                borderWidth: 1,
+                color: "#F4E925",
+                shadowBlur: 10,
+                shadowColor: "#333",
               },
             },
           },
-        
           {
             type: "lines",
             coordinateSystem: "GLMap",
             zlevel: 2,
             effect: {
-              show: true,
+              show: false,
               // period: 10,
               // trailLength: 0,
               color: "#fff",
               opacity: 0.5,
               // symbol: planePath,
               symbolSize: 5,
-              constantSpeed: 40, // 点移动的速度
+              constantSpeed: 7, // 点移动的速度
             },
             lineStyle: {
               normal: {
                 color: "#ff9100",
-                width: 7,
-                opacity: 0.2,
-                curveness: 0,
+                width: 5,
+                opacity: 0.5,
+                curveness: 0.1,
               },
             },
             data: erji_data,
@@ -191,19 +191,19 @@ export default {
               opacity: 0.5,
               // symbol: planePath,
               symbolSize: 3,
-              constantSpeed: 50, // 点移动的速度
+              constantSpeed: 20, // 点移动的速度
             },
             lineStyle: {
               normal: {
                 color: "#b2ff59",
-                width: 4,
+                width: 3,
                 opacity: 0.2,
-                curveness: 0,
+                curveness: 0.1,
               },
             },
             data: sanji_data,
           },
-             {
+          {
             type: "lines",
             coordinateSystem: "GLMap",
             zlevel: 2,
@@ -215,19 +215,19 @@ export default {
               opacity: 0.5,
               // symbol: planePath,
               symbolSize: 2,
-              constantSpeed: 60, // 点移动的速度
+              constantSpeed: 30, // 点移动的速度
             },
             lineStyle: {
               normal: {
                 color: "#84ffff",
                 width: 1,
                 opacity: 0.1,
-                curveness: 0,
+                curveness: 0.1,
               },
             },
             data: siji_data,
           },
-            {
+          {
             type: "lines",
             coordinateSystem: "GLMap",
             zlevel: 2,
@@ -239,14 +239,14 @@ export default {
               opacity: 0.5,
               // symbol: planePath,
               symbolSize: 7,
-              constantSpeed: 15, // 点移动的速度
+              constantSpeed: 5, // 点移动的速度
             },
             lineStyle: {
               normal: {
                 color: "#f44336",
                 width: 12,
                 opacity: 0.2,
-                curveness: 0,
+                curveness: 0.1,
               },
             },
             data: yiji_data,
@@ -395,7 +395,7 @@ export default {
   destroyed() {
     echartslayer.remove();
     window.MAP.setCenter([113.35, 22.9]);
-    removeLayers(window.MAP, ["gzdadushi",'gdxzbj']);
+    removeLayers(window.MAP, ["gzdadushi", "gdxzbj"]);
   },
 };
 </script>

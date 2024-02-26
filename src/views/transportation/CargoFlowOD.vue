@@ -11,6 +11,8 @@
 <script>
 import EchartsLayer from "utils/EchartsLayer.js";
 import { get_cargoData } from "api/transportation/cargo.js";
+import { add_tms, addgeojson_S, addgeojson_L } from "utils/loadLayer.js";
+import { removeLayers, removeLayers2 } from "utils/removeLayers.js";
 import Legend from "components/common/Legend.vue";
 let echartslayer = null;
 export default {
@@ -47,12 +49,20 @@ export default {
   },
   mounted() {
     this.init();
+    this.initLayers();
     this.setTrack();
   },
   methods: {
     init() {
       window.MAP.setCenter([113.35, 22.9]);
       window.MAP.setZoom(6.7);
+    },
+    initLayers() {
+      var dadushi = {
+        "line-color": "#eeeeee",
+        "line-width": 1,
+      };
+      // add_tms(window.MAP, "BigBay3", "line", dadushi);
     },
     setTrack() {
       get_cargoData("/tra_monitor/od-trucks/all").then((res) => {
@@ -189,6 +199,7 @@ export default {
     },
   },
   destroyed() {
+    removeLayers(window.MAP, ["BigBay3"]);
     echartslayer.remove();
     window.MAP.setCenter([113.35, 22.9]);
   },

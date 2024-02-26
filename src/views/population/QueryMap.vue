@@ -165,7 +165,7 @@ export default {
         "line-color": "#df20df",
         "line-width": 2,
       };
-      add_tms(window.MAP, "gzdadushi", "line", paint);
+      // add_tms(window.MAP, "gzdadushi", "line", paint);
     },
     addpolygon(index, val) {
       console.log(index,val,'jajfask');
